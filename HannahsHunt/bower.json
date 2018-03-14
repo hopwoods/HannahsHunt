@@ -1,0 +1,57 @@
+{
+  "name": "HannahsHunt",
+  "homepage": "https://github.com/hopwoods/HannahsHunt",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "install": {
+    "path": {
+        "css": "wwwroot/css",
+        "js": "wwwroot/js",
+        "/[sc|le]ss$/": "wwwroot/css"
+    },
+    "sources": {
+        "jQuery": [
+            "bower_components/jquery/dist/jquery.slim.js",
+            "bower_components/jquery/dist/jquery.slim.min.js"
+        ],
+        "bootstrap": [
+            "bower_components/bootstrap/dist/css/bootstrap.min.css",
+            "bower_components/bootstrap/dist/js/bootstrap.min.js"
+        ],
+        "font-awesome": [
+            "bower_components/font-awesome/less/font-awesome.less",
+            "bower_components/font-awesome/less/screen-reader.less",
+            "bower_components/font-awesome/less/animated.less",
+            "bower_components/font-awesome/less/core.less",
+            "bower_components/font-awesome/less/fixed-width.less",
+            "bower_components/font-awesome/less/icons.less",
+            "bower_components/font-awesome/less/larger.less",
+            "bower_components/font-awesome/less/list.less",
+            "bower_components/font-awesome/less/mixins.less",
+            "bower_components/font-awesome/less/path.less",
+            "bower_components/font-awesome/less/rotated-flipped.less",
+            "bower_components/font-awesome/less/stacked.less",
+            "bower_components/font-awesome/less/variables.less",
+            "bower_components/font-awesome/less/bordered-pulled.less"
+        ],
+        "moment": [
+            "bower_components/moment/src/moment.js"
+        ]
+    }
+  },
+  "dependencies": {
+    "bootstrap": "v4.0.0",
+    "font-awesome": "Font-Awesome#v4.7.0",
+    "jQuery": "3.3.1",
+    "moment": "2.21.0"
+  }
+}
