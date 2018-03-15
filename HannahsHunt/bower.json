@@ -24,7 +24,6 @@
         "bower_components/jquery/dist/jquery.slim.min.js"
       ],
       "bootstrap": [
-        "bower_components/bootstrap/scss/",
         "bower_components/bootstrap/dist/js/bootstrap.min.js"
       ],
       "font-awesome": [

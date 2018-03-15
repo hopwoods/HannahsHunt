@@ -27,6 +27,7 @@
   --light: #f8f9fa;
   --dark: #001e45;
   --gray: #333333;
+  --happy: #ff5500;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -1178,6 +1179,17 @@ pre {
   .table-hover .table-gray:hover > th {
     background-color: #b9b9b9; }
 
+.table-happy,
+.table-happy > th,
+.table-happy > td {
+  background-color: #ffcfb8; }
+
+.table-hover .table-happy:hover {
+  background-color: #ffbe9f; }
+  .table-hover .table-happy:hover > td,
+  .table-hover .table-happy:hover > th {
+    background-color: #ffbe9f; }
+
 .table-active,
 .table-active > th,
 .table-active > td {
@@ -1876,6 +1888,31 @@ fieldset:disabled a.btn {
     .show > .btn-gray.dropdown-toggle:focus {
       box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(51, 51, 51, 0.5); }
 
+.btn-happy {
+  color: #fff;
+  background: #ff5500 linear-gradient(180deg, #ff6f26, #ff5500) repeat-x;
+  border-color: #ff5500;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075); }
+  .btn-happy:hover {
+    color: #fff;
+    background: #d94800 linear-gradient(180deg, #de6426, #d94800) repeat-x;
+    border-color: #cc4400; }
+  .btn-happy:focus, .btn-happy.focus {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(255, 85, 0, 0.5); }
+  .btn-happy.disabled, .btn-happy:disabled {
+    color: #fff;
+    background-color: #ff5500;
+    border-color: #ff5500; }
+  .btn-happy:not(:disabled):not(.disabled):active, .btn-happy:not(:disabled):not(.disabled).active,
+  .show > .btn-happy.dropdown-toggle {
+    color: #fff;
+    background-color: #cc4400;
+    background-image: none;
+    border-color: #bf4000; }
+    .btn-happy:not(:disabled):not(.disabled):active:focus, .btn-happy:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-happy.dropdown-toggle:focus {
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(255, 85, 0, 0.5); }
+
 .btn-outline-primary {
   color: #588f76;
   background-color: transparent;
@@ -2082,6 +2119,29 @@ fieldset:disabled a.btn {
     .btn-outline-gray:not(:disabled):not(.disabled):active:focus, .btn-outline-gray:not(:disabled):not(.disabled).active:focus,
     .show > .btn-outline-gray.dropdown-toggle:focus {
       box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(51, 51, 51, 0.5); }
+
+.btn-outline-happy {
+  color: #ff5500;
+  background-color: transparent;
+  background-image: none;
+  border-color: #ff5500; }
+  .btn-outline-happy:hover {
+    color: #fff;
+    background-color: #ff5500;
+    border-color: #ff5500; }
+  .btn-outline-happy:focus, .btn-outline-happy.focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 85, 0, 0.5); }
+  .btn-outline-happy.disabled, .btn-outline-happy:disabled {
+    color: #ff5500;
+    background-color: transparent; }
+  .btn-outline-happy:not(:disabled):not(.disabled):active, .btn-outline-happy:not(:disabled):not(.disabled).active,
+  .show > .btn-outline-happy.dropdown-toggle {
+    color: #fff;
+    background-color: #ff5500;
+    border-color: #ff5500; }
+    .btn-outline-happy:not(:disabled):not(.disabled):active:focus, .btn-outline-happy:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-happy.dropdown-toggle:focus {
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(255, 85, 0, 0.5); }
 
 .btn-link {
   font-weight: 400;
@@ -3399,6 +3459,14 @@ tbody.collapse.show {
     text-decoration: none;
     background-color: #1a1a1a; }
 
+.badge-happy {
+  color: #fff;
+  background-color: #ff5500; }
+  .badge-happy[href]:hover, .badge-happy[href]:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #cc4400; }
+
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
@@ -3515,6 +3583,15 @@ tbody.collapse.show {
     border-top-color: #b9b9b9; }
   .alert-gray .alert-link {
     color: #020202; }
+
+.alert-happy {
+  color: #852c00;
+  background: #ffddcc linear-gradient(180deg, #ffe2d4, #ffddcc) repeat-x;
+  border-color: #ffcfb8; }
+  .alert-happy hr {
+    border-top-color: #ffbe9f; }
+  .alert-happy .alert-link {
+    color: #521b00; }
 
 @keyframes progress-bar-stripes {
   from {
@@ -3707,6 +3784,17 @@ tbody.collapse.show {
     color: #fff;
     background-color: #1b1b1b;
     border-color: #1b1b1b; }
+
+.list-group-item-happy {
+  color: #852c00;
+  background-color: #ffcfb8; }
+  .list-group-item-happy.list-group-item-action:hover, .list-group-item-happy.list-group-item-action:focus {
+    color: #852c00;
+    background-color: #ffbe9f; }
+  .list-group-item-happy.list-group-item-action.active {
+    color: #fff;
+    background-color: #852c00;
+    border-color: #852c00; }
 
 .close {
   float: right;
@@ -4287,6 +4375,14 @@ button.bg-gray:hover,
 button.bg-gray:focus {
   background-color: #1a1a1a !important; }
 
+.bg-happy {
+  background-color: #ff5500 !important; }
+
+a.bg-happy:hover, a.bg-happy:focus,
+button.bg-happy:hover,
+button.bg-happy:focus {
+  background-color: #cc4400 !important; }
+
 .bg-gradient-primary {
   background: #588f76 linear-gradient(180deg, #71a08b, #588f76) repeat-x !important; }
 
@@ -4313,6 +4409,9 @@ button.bg-gray:focus {
 
 .bg-gradient-gray {
   background: #333333 linear-gradient(180deg, #525252, #333333) repeat-x !important; }
+
+.bg-gradient-happy {
+  background: #ff5500 linear-gradient(180deg, #ff6f26, #ff5500) repeat-x !important; }
 
 .bg-white {
   background-color: #fff !important; }
@@ -4376,6 +4475,9 @@ button.bg-gray:focus {
 
 .border-gray {
   border-color: #333333 !important; }
+
+.border-happy {
+  border-color: #ff5500 !important; }
 
 .border-white {
   border-color: #fff !important; }
@@ -6137,6 +6239,12 @@ a.text-dark:hover, a.text-dark:focus {
 a.text-gray:hover, a.text-gray:focus {
   color: #1a1a1a !important; }
 
+.text-happy {
+  color: #ff5500 !important; }
+
+a.text-happy:hover, a.text-happy:focus {
+  color: #cc4400 !important; }
+
 .text-muted {
   color: #6c757d !important; }
 
@@ -6201,6 +6309,19 @@ a.text-gray:hover, a.text-gray:focus {
   .table-bordered td {
     border: 1px solid #ddd !important; } }
 
+/* -------------------------------------------------------------
+  Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
+  By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @matthieu_tweets
+
+  List of CSS3 Sass Mixins File to be @imported and @included as you need
+
+  The purpose of this library is to facilitate the use of CSS3 on different browsers avoiding HARD TO READ and NEVER
+  ENDING css files
+
+  note: All CSS3 Properties are being supported by Safari 5
+  more info: http://www.findmebyip.com/litmus/#css3-properties
+
+------------------------------------------------------------- */
 .o-100 {
   opacity: 1;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -6230,6 +6351,26 @@ body {
   color: #343a40;
   font-family: sans-serif; }
 
+#MainContent {
+  margin-top: 6rem; }
+
+#carousel .carousel-item {
+  font-size: 0.9rem; }
+
 img#logo {
   width: 10rem; }
+
+.navbar-dark {
+  -webkit-box-shadow: 0px 1px 4px #343a40;
+  -khtml-box-shadow: 0px 1px 4px #343a40;
+  -moz-box-shadow: 0px 1px 4px #343a40;
+  -ms-box-shadow: 0px 1px 4px #343a40;
+  -o-box-shadow: 0px 1px 4px #343a40;
+  box-shadow: 0px 1px 4px #343a40; }
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.75); }
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: rgba(255, 255, 255, 0.85); }
 
