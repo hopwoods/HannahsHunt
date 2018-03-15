@@ -1,11 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
 <div class="row mt-2">
+    <h1 class="col-12 display-5 text-dark">Hannah's Hunt</h1>
+    <form asp-controller="Home" asp-action="Register" method="post">
+        <!-- Input and Submit elements -->
+    </form>
+</div>
+<div class="row">
     <div class="col-12">
         <div id="carousel" class="carousel slide mb-4" data-ride="carousel">
-
             <div class="carousel-inner">
                 <div class="carousel-item active bg-info">
                     <div class="media">
@@ -50,8 +54,5 @@
             </a>
         </div>
     </div>
-    
-</div>
-<div class="row">
-    <h1 class="col-12 display-5 text-dark">Hannah's Hunt</h1>
+
 </div>
