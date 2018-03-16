@@ -7,7 +7,7 @@ $theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "da
 
 //Imports
 @import "bootstrap/scss/bootstrap.scss";
-@import "css3-mixins.scss";
+@import "pineapple-sass/_pineapple-sass.scss";
 
 //Bootstrap Varible Overides
 $navbar-dark-color: rgba($white, .75);

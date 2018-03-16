@@ -19,26 +19,30 @@
       "/[sc|le]ss$/": "wwwroot/css"
     },
     "sources": {
-      "jQuery": [
-        "bower_components/jquery/dist/jquery.slim.js",
-        "bower_components/jquery/dist/jquery.slim.min.js"
-      ],
-      "bootstrap": [
-        "bower_components/bootstrap/dist/js/bootstrap.min.js"
-      ],
-      "font-awesome": [
-        "bower_components/font-awesome/svg-with-js/js/fontawesome-all.js"
-      ],
-      "moment": [
-        "bower_components/moment/src/moment.js"
-      ]
+        "jQuery": [
+            "bower_components/jquery/dist/jquery.slim.js",
+            "bower_components/jquery/dist/jquery.slim.min.js"
+        ],
+        "bootstrap": [
+            "bower_components/bootstrap/dist/js/bootstrap.min.js"
+        ],
+        "font-awesome": [
+            "bower_components/font-awesome/svg-with-js/js/fontawesome-all.js"
+        ],
+        "moment": [
+            "bower_components/moment/src/moment.js"
+        ],
+        "pineapple-sass": [
+            "bower_components/pineapple-sass/build/_pineapple-sass.scss"
+        ]
     }
   },
   "dependencies": {
     "bootstrap": "v4.0.0",
     "font-awesome": "5.0.8",
     "jQuery": "3.3.1",
-    "moment": "2.21.0"
+    "moment": "2.21.0",
+    "pineapple-sass": "v1.11.15"
   },
   "resolutions": {
     "font-awesome": "5.0.8"

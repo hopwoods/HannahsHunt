@@ -6309,19 +6309,6 @@ a.text-happy:hover, a.text-happy:focus {
   .table-bordered td {
     border: 1px solid #ddd !important; } }
 
-/* -------------------------------------------------------------
-  Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
-  By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @matthieu_tweets
-
-  List of CSS3 Sass Mixins File to be @imported and @included as you need
-
-  The purpose of this library is to facilitate the use of CSS3 on different browsers avoiding HARD TO READ and NEVER
-  ENDING css files
-
-  note: All CSS3 Properties are being supported by Safari 5
-  more info: http://www.findmebyip.com/litmus/#css3-properties
-
-------------------------------------------------------------- */
 .o-100 {
   opacity: 1;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -6361,12 +6348,7 @@ img#logo {
   width: 10rem; }
 
 .navbar-dark {
-  -webkit-box-shadow: 0px 1px 4px #343a40;
-  -khtml-box-shadow: 0px 1px 4px #343a40;
-  -moz-box-shadow: 0px 1px 4px #343a40;
-  -ms-box-shadow: 0px 1px 4px #343a40;
-  -o-box-shadow: 0px 1px 4px #343a40;
-  box-shadow: 0px 1px 4px #343a40; }
+  box-shadow: 0px, 1px, 4px, #343a40; }
 
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.75); }
