@@ -52,7 +52,7 @@ body {
 }
 
 #MainContent {
-    margin-top: 6rem;
+    
 }
 
 #carousel .carousel-item {
@@ -65,7 +65,7 @@ img#logo {
 
 //Navbar
 .navbar-dark {
-    @include box-shadow(0px,1px,4px,$gray-800);
+    //@include box-shadow(0px,1px,4px,$gray-800);
 }
 
 .navbar-dark .navbar-nav .nav-link {
