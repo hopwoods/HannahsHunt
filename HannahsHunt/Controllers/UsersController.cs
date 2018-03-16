@@ -21,7 +21,7 @@ namespace HannahsHunt.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.User.ToListAsync());
+            return View(await _context.Users.ToListAsync());
         }
 
         // GET: Users/Details/5
@@ -32,7 +32,7 @@ namespace HannahsHunt.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var user = await _context.Users
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (user == null)
             {
@@ -72,7 +72,7 @@ namespace HannahsHunt.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User.SingleOrDefaultAsync(m => m.ID == id);
+            var user = await _context.Users.SingleOrDefaultAsync(m => m.ID == id);
             if (user == null)
             {
                 return NotFound();
@@ -123,7 +123,7 @@ namespace HannahsHunt.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var user = await _context.Users
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (user == null)
             {
@@ -138,15 +138,15 @@ namespace HannahsHunt.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.User.SingleOrDefaultAsync(m => m.ID == id);
-            _context.User.Remove(user);
+            var user = await _context.Users.SingleOrDefaultAsync(m => m.ID == id);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
         {
-            return _context.User.Any(e => e.ID == id);
+            return _context.Users.Any(e => e.ID == id);
         }
     }
 }

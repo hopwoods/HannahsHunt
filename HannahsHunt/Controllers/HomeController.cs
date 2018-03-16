@@ -10,9 +10,17 @@ namespace HannahsHunt.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly HannahsHuntContext _context;
+
+        public HomeController(HannahsHuntContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var user = _context.Users.First();
+            return View(user);
         }
 
         public IActionResult About()

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using HannahsHunt.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HannahsHunt
 {
@@ -16,6 +12,10 @@ namespace HannahsHunt
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            using (var db = new HannahsHuntContext())
+            {
+                db.Database.EnsureCreated();
+            }
         }
 
         public IConfiguration Configuration { get; }
@@ -24,10 +24,7 @@ namespace HannahsHunt
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            services.AddDbContext<HannahsHuntContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("HannahsHuntContext")));
-            
+            services.AddEntityFrameworkSqlite().AddDbContext<HannahsHuntContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
