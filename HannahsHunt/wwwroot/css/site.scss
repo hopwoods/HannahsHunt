@@ -1,0 +1,77 @@
+﻿//Bootstrap Options
+$enable-shadows: true;
+$enable-gradients: true;
+
+//Theme Colors
+$theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "dark": #001e45, "danger": #e82c2a, "gray": #333333, "happy": #ff5500);
+
+//Imports
+@import "bootstrap/scss/bootstrap.scss";
+@import "pineapple-sass/_pineapple-sass.scss";
+
+//Bootstrap Varible Overides
+$navbar-dark-color: rgba($white, .75);
+$navbar-dark-hover-color: rgba($white, .85);
+
+//utilities
+@mixin Opacity($value) {
+    $IEValue: $value*100;
+    opacity: $value;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="+$IEValue+")";
+    filter: alpha(opacity=$IEValue);
+}
+
+@mixin push--auto {
+    margin: {
+        left: auto;
+        right: auto;
+    }
+}
+
+.o-100 {
+    @include Opacity(1);
+}
+.o-75 {
+    @include Opacity(0.75);
+}
+.o-50 {
+    @include Opacity(0.50);
+}
+.o-25 {
+    @include Opacity(0.25);
+}
+.o-0 {
+    @include Opacity(0.00);
+}
+
+
+//Structure
+body {
+    color: $gray-800;
+    font-family: sans-serif;
+}
+
+#MainContent {
+    
+}
+
+#carousel .carousel-item {
+    font-size: 0.9rem;
+}
+
+img#logo {
+    width: 10rem;
+}
+
+//Navbar
+.navbar-dark {
+    //@include box-shadow(0px,1px,4px,$gray-800);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: $navbar-dark-color;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: $navbar-dark-hover-color;
+}
+
