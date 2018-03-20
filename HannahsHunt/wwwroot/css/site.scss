@@ -4,6 +4,10 @@ $enable-gradients: true;
 
 //Theme Colors
 $theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "dark": #001e45, "danger": #e82c2a, "gray": #333333, "happy": #ff5500);
+$border-radius: 0em;
+$btn-box-shadow: 0;
+$btn-border-radius-lg: 0;
+$btn-border-radius-sm: 0;
 
 //Imports
 @import "bootstrap/scss/bootstrap.scss";
@@ -12,6 +16,7 @@ $theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "da
 //Bootstrap Varible Overides
 $navbar-dark-color: rgba($white, .75);
 $navbar-dark-hover-color: rgba($white, .85);
+
 
 //utilities
 @mixin Opacity($value) {
