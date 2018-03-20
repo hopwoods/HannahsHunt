@@ -5,24 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HannahsHunt.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HannahsHunt.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly HannahsHuntContext _context;
-
-        public HomeController(HannahsHuntContext context)
-        {
-            _context = context;
-        }
-
+        [Authorize]
         public IActionResult Index()
         {
-            var user = _context.Users.First();
-            return View(user);
+            return View();
         }
-
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
