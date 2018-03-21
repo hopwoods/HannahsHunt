@@ -1,65 +1,50 @@
-﻿@model IEnumerable<HannahsHunt.Models.User>
-
+﻿@model IEnumerable<HannahsHunt.Models.ApplicationUser>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "View";
 }
 
-<h2>Index</h2>
+<h2>Manage Users</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <button asp-controller="Users" asp-action="Create" class="btn btn-primary" onclick="location.href='@Url.Action("Create","Users")'">Add New User</button>
 </p>
-<table class="table">
-    <thead>
-        <tr>
+<div class="responsive-table">
+    <table class="col-md-12 table-hover table-sm">
+        <thead class="">
+            <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.UserID)
+                    @Html.DisplayNameFor(model => model.UserName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Password)
+                    @Html.DisplayNameFor(model => model.Email)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Salt)
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EmailAdddress)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailAdddress)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td data-title="@Html.DisplayNameFor(model => model.UserName)">
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td data-title="@Html.DisplayNameFor(model => model.Email)">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td data-title="@Html.DisplayNameFor(model => model.PhoneNumber)">
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td class="" data-title="">
+                        <button asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Edit</button>
+                        <button asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Details</button>
+                        <button asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

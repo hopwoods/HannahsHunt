@@ -11,14 +11,15 @@ using System;
 namespace HannahsHunt.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180320185805_initial")]
-    partial class initial
+    [Migration("20180321180708_remove-testcontext")]
+    partial class removetestcontext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("HannahsHunt.Models.ApplicationUser", b =>
                 {
@@ -65,7 +66,8 @@ namespace HannahsHunt.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex");
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -88,7 +90,8 @@ namespace HannahsHunt.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex");
+                        .HasName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
                 });
