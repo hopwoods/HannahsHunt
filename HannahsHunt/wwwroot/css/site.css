@@ -6338,6 +6338,9 @@ body {
   color: #343a40;
   font-family: sans-serif; }
 
+#MainContent {
+  margin-top: 2rem; }
+
 #carousel .carousel-item {
   font-size: 0.9rem; }
 
@@ -6349,4 +6352,55 @@ img#logo {
 
 .navbar-dark .navbar-nav .nav-link:hover {
   color: rgba(255, 255, 255, 0.85); }
+
+.responsive-table td {
+  border: none;
+  border-bottom: 1px solid #e9ecef;
+  white-space: normal;
+  text-align: left;
+  min-height: 2.4rem;
+  line-height: 1.5; }
+
+@media only screen and (max-width: 800px) {
+  /* Force table to not be like tables anymore */
+  .responsive-table table,
+  .responsive-table thead,
+  .responsive-table tbody,
+  .responsive-table th,
+  .responsive-table td,
+  .responsive-table tr {
+    display: block; }
+  /* Hide table headers (but not display: none;, for accessibility) */
+  .responsive-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px; }
+  .responsive-table tr {
+    border: 1px solid #ccc; }
+  .responsive-table td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #e9ecef;
+    position: relative;
+    padding-left: 50%;
+    white-space: normal;
+    text-align: left;
+    min-height: 2.4rem;
+    line-height: 1.5; }
+  .responsive-table td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 0.6rem;
+    left: 0.6rem;
+    width: 45%;
+    padding-right: 0.1rem;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold; }
+  /*
+	Label the data
+	*/
+  .responsive-table td:before {
+    content: attr(data-title); } }
 

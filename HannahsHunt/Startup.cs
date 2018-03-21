@@ -12,24 +12,63 @@ using HannahsHunt.Data;
 using HannahsHunt.Models;
 using HannahsHunt.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace HannahsHunt
 {
     public class Startup
     {
-        string _testSecret = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            //initializing custom roles 
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            string[] roleNames = { "Administrator", "Basic" };
+            IdentityResult roleResult;
+
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    //create the roles and seed them to the database
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+            //Create a super user who will maintain the web app
+            var poweruser = new ApplicationUser
+            {
+                UserName = Configuration["Authentication:HannahsHunt:AdminUserName"],
+                Email = Configuration["Authentication:HannahsHunt:AdminUserEmail"],
+            };
+            //Ensure you have these values in your appsettings.json file
+            string userPWD = Configuration["Authentication:HannahsHunt:AdminUserPassword"];
+            var _user = await UserManager.FindByEmailAsync(Configuration["Authentication:HannahsHunt:AdminUserEmail"]);
+
+            if (_user == null)
+            {
+                var createPowerUser = await UserManager.CreateAsync(poweruser, userPWD);
+                if (createPowerUser.Succeeded)
+                {
+                    //here we tie the new user to the role
+                    await UserManager.AddToRoleAsync(poweruser, "Administrator");
+
+                }
+            }
+        }
+
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            _testSecret = Configuration["MySecret"];
-
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -48,12 +87,15 @@ namespace HannahsHunt
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddMvc();
-            services.AddEntityFrameworkSqlite().AddDbContext<ApplicationDbContext>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             var builder = new ConfigurationBuilder();
 
@@ -69,18 +111,15 @@ namespace HannahsHunt
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            
-
             app.UseStaticFiles();
-
             app.UseAuthentication();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            CreateRoles(serviceProvider).Wait();
         }
     }
 }
