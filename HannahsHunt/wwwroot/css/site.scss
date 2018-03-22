@@ -1,6 +1,6 @@
 ﻿//Bootstrap Options
 $enable-shadows: true;
-$enable-gradients: true;
+$enable-gradients: false;
 
 //Theme Colors
 $theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "dark": #001e45, "danger": #e82c2a, "gray": #333333, "happy": #ff5500, "facebook": #3e5b98, "google": #4285f4);
@@ -193,8 +193,16 @@ form {
     margin-bottom: 0px !important;
 }
 
-@media only screen and (max-width: 800px) {
+div.validation-summary-errors ul {
+    list-style:none;
+    list-style-type:none;
+    list-style-position:outside;
+    margin: 0.1rem;
+    padding-left: 0;
+}
 
+/* Responsive Tables */
+@media only screen and (max-width: 800px) {
     /* Force table to not be like tables anymore */
     .responsive-table table,
     .responsive-table thead,
@@ -204,7 +212,6 @@ form {
     .responsive-table tr {
         display: block;
     }
-
     /* Hide table headers (but not display: none;, for accessibility) */
     .responsive-table thead tr {
         position: absolute;
@@ -240,7 +247,6 @@ form {
         text-align: left;
         font-weight: bold;
     }
-
     /*
 	Label the data
 	*/
