@@ -6,7 +6,7 @@ using HannahsHunt.Data;
 using HannahsHunt.Models;
 using HannahsHunt.Models.UsersViewModels;
 using HannahsHunt.Services;
-using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HannahsHunt.Controllers
 {
@@ -37,7 +38,7 @@ namespace HannahsHunt.Controllers
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<UsersController> logger)
         {
             _context = context;
             _userManager = userManager;
@@ -53,12 +54,29 @@ namespace HannahsHunt.Controllers
         }
 
         // GET: Administration
-        public ActionResult Index(string returnUrl = null)
+        public async Task<IActionResult> Index(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            List<ApplicationUser> users = _userManager.Users.Include(u => u.Roles).ToList(); 
-            return View(users);
+            List<UsersWithRolesViewModel> usersWithRoles = new List<UsersWithRolesViewModel>();
+            List<ApplicationUser> users = _userManager.Users.ToList();
+            foreach (var user in users)
+            {
+
+                // Get the roles for the user
+                var roles = await _userManager.GetRolesAsync(user);
+                usersWithRoles.Add(new UsersWithRolesViewModel()
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    UserEmail = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Roles = roles
+                });
+            }
+
+            return View(usersWithRoles);
         }
+            
 
         // GET: Administration/Details/5
         public ActionResult Details(int id, string returnUrl = null)
