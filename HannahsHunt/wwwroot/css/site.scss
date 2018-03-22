@@ -3,7 +3,7 @@ $enable-shadows: true;
 $enable-gradients: true;
 
 //Theme Colors
-$theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "dark": #001e45, "danger": #e82c2a, "gray": #333333, "happy": #ff5500);
+$theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "dark": #001e45, "danger": #e82c2a, "gray": #333333, "happy": #ff5500, "facebook": #3e5b98, "google": #4285f4);
 $border-radius: 0em;
 $btn-box-shadow: 0;
 $btn-border-radius-lg: 0;
@@ -61,7 +61,7 @@ body {
 }
 
 #MainContent {
-    //margin-top: 4.9rem;
+    margin-top: 6rem;
 }
 
 #carousel .carousel-item {
@@ -93,6 +93,104 @@ img#logo {
     text-align: left;
     min-height: 2.4rem;
     line-height: $line-height-base
+}
+
+// Forms
+form {
+    color: $gray-700;
+}
+
+.checkbox label:after,
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+}
+
+.radio .cr {
+    border-radius: 50%;
+}
+
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 20%;
+    left: 15%;
+}
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+}
+
+// Login Page
+.login {
+    margin: 0 auto;
+}
+.login h5 {
+    text-align: center;
+    line-height: 300%;
+}
+
+.login-or {
+    position: relative;
+    font-size: 18px;
+    color: #aaa;
+    top: 12px;
+}
+
+.span-or {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    margin-left: -25px;
+    background-color: #fff;
+    width: 50px;
+    text-align: center;
+}
+
+.hr-or {
+    background-color: #cdcdcd;
+    height: 1px;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
 }
 
 @media only screen and (max-width: 800px) {
