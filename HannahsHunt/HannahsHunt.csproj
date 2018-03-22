@@ -2,25 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>d039b8c7-3c08-4a3e-837b-4623e616cb51</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Migrations\20180316110249_Initial.cs" />
-    <Compile Remove="Migrations\20180316110249_Initial.Designer.cs" />
-    <Compile Remove="Migrations\20180316112528_User-Required-Fields.cs" />
-    <Compile Remove="Migrations\20180316112528_User-Required-Fields.Designer.cs" />
-    <Compile Remove="Migrations\20180316113026_User-Required-Fields.cs" />
-    <Compile Remove="Migrations\20180316113026_User-Required-Fields.Designer.cs" />
-    <Compile Remove="Migrations\20180316123447_initial.cs" />
-    <Compile Remove="Migrations\20180316123447_initial.Designer.cs" />
-    <Compile Remove="Migrations\20180316123654_initial.cs" />
-    <Compile Remove="Migrations\20180316123654_initial.Designer.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
@@ -28,6 +15,7 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+      <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>

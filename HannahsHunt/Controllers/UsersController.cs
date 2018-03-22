@@ -2,151 +2,202 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using HannahsHunt.Data;
 using HannahsHunt.Models;
+using HannahsHunt.Models.UsersViewModels;
+using HannahsHunt.Services;
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HannahsHunt.Controllers
 {
+    [Authorize(Roles="Administrator")]
     public class UsersController : Controller
     {
-        private readonly HannahsHuntContext _context;
 
-        public UsersController(HannahsHuntContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IEmailSender _emailSender;
+        private readonly ILogger _logger;
+
+        //Create DB Context
+        private readonly ApplicationDbContext _context;
+
+        //Initialise Context
+        public UsersController(
+            ApplicationDbContext context, 
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            IEmailSender emailSender,
+            ILogger<UsersController> logger)
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _emailSender = emailSender;
+            _logger = logger;
         }
 
-        // GET: Users
-        public async Task<IActionResult> Index()
+        //Clean Up Context
+        protected override void Dispose(bool disposing)
         {
-            return View(await _context.Users.ToListAsync());
+            _context.Dispose();
         }
 
-        // GET: Users/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Administration
+        public async Task<IActionResult> Index(string returnUrl = null)
         {
-            if (id == null)
+            ViewData["ReturnUrl"] = returnUrl;
+            List<UsersWithRolesViewModel> usersWithRoles = new List<UsersWithRolesViewModel>();
+            List<ApplicationUser> users = _userManager.Users.ToList();
+            foreach (var user in users)
             {
-                return NotFound();
+
+                // Get the roles for the user
+                var roles = await _userManager.GetRolesAsync(user);
+                usersWithRoles.Add(new UsersWithRolesViewModel()
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    UserEmail = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Roles = roles
+                });
             }
 
-            var user = await _context.Users
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            return View(usersWithRoles);
+        }
+            
 
-            return View(user);
+        // GET: Administration/Details/5
+        public ActionResult Details(int id, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
         }
 
-        // GET: Users/Create
-        public IActionResult Create()
+        // GET: Administration/Create
+        [HttpGet]
+        public IActionResult Create(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        // POST: Administration/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateUserViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User created a new account with password.");
+
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+
+                    if(model.IsAdmin == true)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Administrator");
+                    } else
+                    {
+                        await _userManager.AddToRoleAsync(user, "Basic");
+                    }                    
+                    _logger.LogInformation("User created a new account with password.");
+
+                    ViewBag.Message = "<strong>Success!</strong> The User has been created";
+                    return View();
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        // GET: Administration2/Edit/5
+        public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Administration2/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,UserID,Password,Salt,FirstName,LastName,EmailAdddress")] User user)
+        public ActionResult Edit(int id, IFormCollection collection)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
+                // TODO: Add update logic here
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            catch
+            {
+                return View();
+            }
         }
 
-        // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: Administration2/Delete/5
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = await _context.Users.SingleOrDefaultAsync(m => m.ID == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
+            return View();
         }
 
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Administration2/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,UserID,Password,Salt,FirstName,LastName,EmailAdddress")] User user)
+        public ActionResult Delete(int id, IFormCollection collection)
         {
-            if (id != user.ID)
+            try
             {
-                return NotFound();
-            }
+                // TODO: Add delete logic here
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
-        }
-
-        // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
+            catch
             {
-                return NotFound();
+                return View();
             }
+        }
 
-            var user = await _context.Users
-                .SingleOrDefaultAsync(m => m.ID == id);
-            if (user == null)
+        #region Helpers
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
             {
-                return NotFound();
+                ModelState.AddModelError(string.Empty, error.Description);
             }
-
-            return View(user);
         }
 
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        private IActionResult RedirectToLocal(string returnUrl)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(m => m.ID == id);
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
         }
 
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.ID == id);
-        }
+        #endregion
     }
 }

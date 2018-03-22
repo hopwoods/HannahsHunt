@@ -4,6 +4,10 @@ $enable-gradients: true;
 
 //Theme Colors
 $theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "dark": #001e45, "danger": #e82c2a, "gray": #333333, "happy": #ff5500);
+$border-radius: 0em;
+$btn-box-shadow: 0;
+$btn-border-radius-lg: 0;
+$btn-border-radius-sm: 0;
 
 //Imports
 @import "bootstrap/scss/bootstrap.scss";
@@ -12,6 +16,7 @@ $theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "da
 //Bootstrap Varible Overides
 $navbar-dark-color: rgba($white, .75);
 $navbar-dark-hover-color: rgba($white, .85);
+
 
 //utilities
 @mixin Opacity($value) {
@@ -52,7 +57,7 @@ body {
 }
 
 #MainContent {
-    
+    margin-top: 2rem;
 }
 
 #carousel .carousel-item {
@@ -73,5 +78,72 @@ img#logo {
 }
 .navbar-dark .navbar-nav .nav-link:hover {
     color: $navbar-dark-hover-color;
+}
+
+//Responsive Tables
+
+.responsive-table td {
+    border: none;
+    border-bottom: 1px solid $gray-200;
+    white-space: normal;
+    text-align: left;
+    min-height: 2.4rem;
+    line-height: $line-height-base
+}
+
+@media only screen and (max-width: 800px) {
+
+    /* Force table to not be like tables anymore */
+    .responsive-table table,
+    .responsive-table thead,
+    .responsive-table tbody,
+    .responsive-table th,
+    .responsive-table td,
+    .responsive-table tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .responsive-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .responsive-table tr {
+        border: 1px solid #ccc;
+    }
+
+    .responsive-table td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid $gray-200;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align: left;
+        min-height: 2.4rem;
+        line-height: $line-height-base
+    }
+
+    .responsive-table td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 0.6rem;
+        left: 0.6rem;
+        width: 45%;
+        padding-right: 0.1rem;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    /*
+	Label the data
+	*/
+    .responsive-table td:before {
+        content: attr(data-title);
+    }
 }
 
