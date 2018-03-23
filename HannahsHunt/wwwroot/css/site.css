@@ -30,6 +30,7 @@
   --happy: #ff5500;
   --facebook: #3e5b98;
   --google: #4285f4;
+  --twitter: #55ACEE;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -1214,6 +1215,17 @@ pre {
   .table-hover .table-google:hover > th {
     background-color: #b2cefb; }
 
+.table-twitter,
+.table-twitter > th,
+.table-twitter > td {
+  background-color: #cfe8fa; }
+
+.table-hover .table-twitter:hover {
+  background-color: #b8ddf8; }
+  .table-hover .table-twitter:hover > td,
+  .table-hover .table-twitter:hover > th {
+    background-color: #b8ddf8; }
+
 .table-active,
 .table-active > th,
 .table-active > td {
@@ -1975,6 +1987,30 @@ fieldset:disabled a.btn {
     .show > .btn-google.dropdown-toggle:focus {
       box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(66, 133, 244, 0.5); }
 
+.btn-twitter {
+  color: #212529;
+  background-color: #55ACEE;
+  border-color: #55ACEE;
+  box-shadow: 0; }
+  .btn-twitter:hover {
+    color: #fff;
+    background-color: #329beb;
+    border-color: #2795e9; }
+  .btn-twitter:focus, .btn-twitter.focus {
+    box-shadow: 0, 0 0 0 0.2rem rgba(85, 172, 238, 0.5); }
+  .btn-twitter.disabled, .btn-twitter:disabled {
+    color: #212529;
+    background-color: #55ACEE;
+    border-color: #55ACEE; }
+  .btn-twitter:not(:disabled):not(.disabled):active, .btn-twitter:not(:disabled):not(.disabled).active,
+  .show > .btn-twitter.dropdown-toggle {
+    color: #fff;
+    background-color: #2795e9;
+    border-color: #1b90e8; }
+    .btn-twitter:not(:disabled):not(.disabled):active:focus, .btn-twitter:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-twitter.dropdown-toggle:focus {
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(85, 172, 238, 0.5); }
+
 .btn-outline-primary {
   color: #588f76;
   background-color: transparent;
@@ -2250,6 +2286,29 @@ fieldset:disabled a.btn {
     .btn-outline-google:not(:disabled):not(.disabled):active:focus, .btn-outline-google:not(:disabled):not(.disabled).active:focus,
     .show > .btn-outline-google.dropdown-toggle:focus {
       box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(66, 133, 244, 0.5); }
+
+.btn-outline-twitter {
+  color: #55ACEE;
+  background-color: transparent;
+  background-image: none;
+  border-color: #55ACEE; }
+  .btn-outline-twitter:hover {
+    color: #212529;
+    background-color: #55ACEE;
+    border-color: #55ACEE; }
+  .btn-outline-twitter:focus, .btn-outline-twitter.focus {
+    box-shadow: 0 0 0 0.2rem rgba(85, 172, 238, 0.5); }
+  .btn-outline-twitter.disabled, .btn-outline-twitter:disabled {
+    color: #55ACEE;
+    background-color: transparent; }
+  .btn-outline-twitter:not(:disabled):not(.disabled):active, .btn-outline-twitter:not(:disabled):not(.disabled).active,
+  .show > .btn-outline-twitter.dropdown-toggle {
+    color: #212529;
+    background-color: #55ACEE;
+    border-color: #55ACEE; }
+    .btn-outline-twitter:not(:disabled):not(.disabled):active:focus, .btn-outline-twitter:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-outline-twitter.dropdown-toggle:focus {
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(85, 172, 238, 0.5); }
 
 .btn-link {
   font-weight: 400;
@@ -3590,6 +3649,14 @@ tbody.collapse.show {
     text-decoration: none;
     background-color: #1266f1; }
 
+.badge-twitter {
+  color: #212529;
+  background-color: #55ACEE; }
+  .badge-twitter[href]:hover, .badge-twitter[href]:focus {
+    color: #212529;
+    text-decoration: none;
+    background-color: #2795e9; }
+
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
@@ -3733,6 +3800,15 @@ tbody.collapse.show {
     border-top-color: #b2cefb; }
   .alert-google .alert-link {
     color: #172f57; }
+
+.alert-twitter {
+  color: #2c597c;
+  background-color: #ddeefc;
+  border-color: #cfe8fa; }
+  .alert-twitter hr {
+    border-top-color: #b8ddf8; }
+  .alert-twitter .alert-link {
+    color: #1f3e56; }
 
 @keyframes progress-bar-stripes {
   from {
@@ -3958,6 +4034,17 @@ tbody.collapse.show {
     color: #fff;
     background-color: #22457f;
     border-color: #22457f; }
+
+.list-group-item-twitter {
+  color: #2c597c;
+  background-color: #cfe8fa; }
+  .list-group-item-twitter.list-group-item-action:hover, .list-group-item-twitter.list-group-item-action:focus {
+    color: #2c597c;
+    background-color: #b8ddf8; }
+  .list-group-item-twitter.list-group-item-action.active {
+    color: #fff;
+    background-color: #2c597c;
+    border-color: #2c597c; }
 
 .close {
   float: right;
@@ -4560,6 +4647,14 @@ button.bg-google:hover,
 button.bg-google:focus {
   background-color: #1266f1 !important; }
 
+.bg-twitter {
+  background-color: #55ACEE !important; }
+
+a.bg-twitter:hover, a.bg-twitter:focus,
+button.bg-twitter:hover,
+button.bg-twitter:focus {
+  background-color: #2795e9 !important; }
+
 .bg-white {
   background-color: #fff !important; }
 
@@ -4631,6 +4726,9 @@ button.bg-google:focus {
 
 .border-google {
   border-color: #4285f4 !important; }
+
+.border-twitter {
+  border-color: #55ACEE !important; }
 
 .border-white {
   border-color: #fff !important; }
@@ -6409,6 +6507,12 @@ a.text-facebook:hover, a.text-facebook:focus {
 
 a.text-google:hover, a.text-google:focus {
   color: #1266f1 !important; }
+
+.text-twitter {
+  color: #55ACEE !important; }
+
+a.text-twitter:hover, a.text-twitter:focus {
+  color: #2795e9 !important; }
 
 .text-muted {
   color: #6c757d !important; }

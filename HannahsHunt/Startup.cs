@@ -64,7 +64,7 @@ namespace HannahsHunt
             }
         }
 
-        
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -83,15 +83,24 @@ namespace HannahsHunt
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
-
+            services.AddAuthentication().AddTwitter(twitterOptions =>
+                        {
+                            twitterOptions.ConsumerKey = Configuration["Authentication:Twitter:ConsumerKey"];
+                            twitterOptions.ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"];
+                        });
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
+
             services.AddMvc();
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,6 +120,8 @@ namespace HannahsHunt
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            var options = new RewriteOptions().AddRedirectToHttps();
+            app.UseRewriter(options);
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc(routes =>

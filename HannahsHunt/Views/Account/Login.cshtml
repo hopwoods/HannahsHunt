@@ -4,7 +4,6 @@
 @using Microsoft.AspNetCore.Http.Authentication
 @model LoginViewModel
 @inject SignInManager<ApplicationUser> SignInManager
-
 @{
     ViewData["Title"] = "Log in";
 }
@@ -28,22 +27,11 @@
                             <div class="row">
                                 @foreach (var provider in loginProviders)
                                 {
-                                    @if (provider.Name == "Google")
-                                    {
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
-                                            <button type="submit" class="btn btn-google btn-lg btn-block mb-1 mb-md-0" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
-                                                <span class="fab fa-google fa-1x"></span> @provider.Name
-                                            </button>
-                                        </div>
-                                    }
-                                    else if (provider.Name == "Facebook")
-                                    {
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
-                                            <button type="submit" class="btn btn-facebook btn-lg btn-block mb-1 mb-md-0" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
-                                                <span class="fab fa-facebook fa-1x"></span> @provider.Name
-                                            </button>
-                                        </div>
-                                    }
+                                    <div class="col-xs-4 col-sm-4 col-md-4">
+                                        <button type="submit" class="btn btn-@provider.Name.ToLower() btn-lg btn-block mb-1 mb-md-0 text-white" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                            <span class="fab fa-@provider.Name.ToLower() fa-1x"></span> @provider.Name
+                                        </button>
+                                    </div>
                                 }
                             </div>
                         </form>
@@ -88,8 +76,6 @@
         </section>
     </div>
 </div>
-
-
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
