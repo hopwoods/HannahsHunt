@@ -119,7 +119,7 @@ namespace HannahsHunt
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            CreateRoles(serviceProvider).Wait();
             var options = new RewriteOptions().AddRedirectToHttps();
             app.UseRewriter(options);
             app.UseStaticFiles();
@@ -130,7 +130,7 @@ namespace HannahsHunt
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            CreateRoles(serviceProvider).Wait();
+            
         }
     }
 }
