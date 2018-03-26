@@ -6637,10 +6637,7 @@ img#logo {
 
 .btn {
   font-family: "Roboto", sans-serif;
-  font-size: 1.0925rem;
   display: inline-block;
-  min-height: 36px;
-  min-width: 88px;
   padding: 6px 16px;
   line-height: 1.42857143;
   text-align: center;
