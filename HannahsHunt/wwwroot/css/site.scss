@@ -12,6 +12,7 @@ $btn-border-radius-sm: 0;
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|Roboto:300');
 $font-family-base: "IBM Plex Sans Condensed";
+$font-size-base: 1.15rem;
 
 //Imports
 @import "bootstrap/scss/bootstrap.scss";
@@ -63,11 +64,11 @@ h1, h2, h3, h4, h5 , h6 {
 
 //Structure
 body {
-    color: $gray-800;
-}
+    color: $gray-800;}
 
 #Jumbotron {
-    margin-top: 4.9rem;
+    margin-top: 4.8rem;
+    box-shadow: rgba(0,0,0,0.4) 0 2px 6px;
 }
 
 #MainContent {
@@ -75,7 +76,7 @@ body {
 }
 
 #carousel .carousel-item {
-    font-size: 0.9rem;
+    font-size: $font-size-base * 0.9;
 }
 
 img#logo {
@@ -83,6 +84,9 @@ img#logo {
 }
 
 //Navbar
+.navbar {
+    box-shadow: rgba(0,0,0,0.4) 0 2px 6px;
+}
 .navbar-dark {
     //@include box-shadow(0px,1px,4px,$gray-800);
 }
@@ -102,7 +106,7 @@ img#logo {
 
 .btn {
     font-family: "Roboto", sans-serif;
-    font-size: 0.95rem;
+    font-size: $font-size-base * 0.95;
     display: inline-block;
     min-height: 36px;
     min-width: 88px;
@@ -293,6 +297,22 @@ div.validation-summary-errors ul {
     list-style-position:outside;
     margin: 0.1rem;
     padding-left: 0;
+}
+
+/* Validation */
+.validation-summary-valid {
+    display: none;
+}
+
+.validation-summary-errors {
+    display: block;
+}
+div.validation-summary-errors svg {
+    position: relative;
+    top: 0;
+}
+div.validation-summary-errors ul {
+    display: inline-block;
 }
 
 /* Responsive Tables */
