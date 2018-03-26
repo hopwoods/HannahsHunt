@@ -8,12 +8,8 @@ using System.Threading.Tasks;
 
 namespace HannahsHunt.Models.UsersViewModels
 {
-    public class UsersWithRolesViewModel
+    public class UsersWithRolesViewModel : ApplicationUser
     {
-        public string Id { get; set; }
-        public string UserName { get; set; }
-        public string UserEmail { get; set; }
-        public string PhoneNumber { get; set; }
         public IList<string> Roles { get; set; }
     }
 }

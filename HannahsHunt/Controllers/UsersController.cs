@@ -60,20 +60,17 @@ namespace HannahsHunt.Controllers
             List<UsersWithRolesViewModel> usersWithRoles = new List<UsersWithRolesViewModel>();
             List<ApplicationUser> users = _userManager.Users.ToList();
             foreach (var user in users)
-            {
-
-                // Get the roles for the user
+            {// Get the roles for the user
                 var roles = await _userManager.GetRolesAsync(user);
                 usersWithRoles.Add(new UsersWithRolesViewModel()
                 {
                     Id = user.Id,
                     UserName = user.UserName,
-                    UserEmail = user.Email,
+                    Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
                     Roles = roles
                 });
             }
-
             return View(usersWithRoles);
         }
             
