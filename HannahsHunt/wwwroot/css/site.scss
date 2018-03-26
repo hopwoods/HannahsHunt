@@ -25,10 +25,9 @@ $navbar-dark-hover-color: rgba($white, .85);
 
 h1, h2, h3, h4, h5 , h6 {
     font-family: "Roboto";
+    
 }
-.btn {
-    font-family: "Roboto";
-}
+
 
 //utilities
 @mixin Opacity($value) {
@@ -94,6 +93,90 @@ img#logo {
 .navbar-dark .navbar-nav .nav-link:hover {
     color: $navbar-dark-hover-color;
 }
+
+//Buttons
+
+.btn, .nav-link {
+    font-family: "Roboto";
+}
+
+.btn {
+    font-family: "Roboto", sans-serif;
+    font-size: 0.95rem;
+    display: inline-block;
+    min-height: 36px;
+    min-width: 88px;
+    padding: 6px 16px;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 2px;
+    outline: 0;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:active {
+        box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4);
+    }
+}
+
+
+/* Ripple */
+.btn-ripple {
+    overflow: hidden;
+    position: relative;
+}
+
+.btn-ripple:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 120px;
+    margin-left: -60px;
+    margin-top: -60px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 100%;
+    transform: scale(0);
+}
+
+@keyframes btn-ripple {
+    0% {
+        transform: scale(0);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+.btn-ripple:not(:active):after {
+    animation: md-btn-ripple 0.6s ease-out;
+}
+
+.btn-ripple:after {
+    visibility: hidden;
+}
+
+.btn-ripple:focus:after {
+    visibility: visible;
+}
+
 
 //Responsive Tables
 
