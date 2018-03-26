@@ -71,6 +71,7 @@ namespace HannahsHunt.Controllers
                     Roles = roles
                 });
             }
+            _logger.LogInformation("Users list presented.");
             return View(usersWithRoles);
         }
             
