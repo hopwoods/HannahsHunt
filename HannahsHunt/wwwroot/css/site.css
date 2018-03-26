@@ -1,4 +1,5 @@
-﻿/*!
+﻿@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|Roboto:300");
+/*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -60,7 +61,7 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "IBM Plex Sans Condensed";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -4185,7 +4186,7 @@ button.close {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "IBM Plex Sans Condensed";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -4270,7 +4271,7 @@ button.close {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "IBM Plex Sans Condensed";
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -6578,6 +6579,9 @@ a.text-twitter:hover, a.text-twitter:focus {
   .table-bordered td {
     border: 1px solid #ddd !important; } }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto"; }
+
 .o-100 {
   opacity: 1;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
@@ -6604,8 +6608,7 @@ a.text-twitter:hover, a.text-twitter:focus {
   filter: alpha(opacity=0); }
 
 body {
-  color: #343a40;
-  font-family: sans-serif; }
+  color: #343a40; }
 
 #Jumbotron {
   margin-top: 4.9rem; }

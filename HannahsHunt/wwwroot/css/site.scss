@@ -9,13 +9,23 @@ $btn-box-shadow: 0;
 $btn-border-radius-lg: 0;
 $btn-border-radius-sm: 0;
 
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|Roboto:300');
+$font-family-base: "IBM Plex Sans Condensed";
+
 //Imports
 @import "bootstrap/scss/bootstrap.scss";
 @import "pineapple-sass/_pineapple-sass.scss";
 
+
 //Bootstrap Varible Overides
 $navbar-dark-color: rgba($white, .75);
 $navbar-dark-hover-color: rgba($white, .85);
+
+
+h1, h2, h3, h4, h5 , h6 {
+    font-family: "Roboto";
+}
 
 
 //utilities
@@ -53,7 +63,6 @@ $navbar-dark-hover-color: rgba($white, .85);
 //Structure
 body {
     color: $gray-800;
-    font-family: sans-serif;
 }
 
 #Jumbotron {
