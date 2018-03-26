@@ -6582,6 +6582,9 @@ a.text-twitter:hover, a.text-twitter:focus {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto"; }
 
+.btn {
+  font-family: "Roboto"; }
+
 .o-100 {
   opacity: 1;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
