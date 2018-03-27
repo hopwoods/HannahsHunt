@@ -8,7 +8,7 @@
     ViewData["Title"] = "Log in";
 }
 <div class="row">
-    <div class="login col-md-6">
+    <div class="login col-md-8 col-lg-6">
         <h5 class="mb-3">Please Log In, or <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Sign Up</a></h5>
         <div class="">
             <section>
@@ -28,7 +28,7 @@
                                 @foreach (var provider in loginProviders)
                                 {
                                     <div class="col-xs-4 col-sm-4 col-md-4">
-                                        <button type="submit" class="btn btn-@provider.Name.ToLower() btn-lg btn-block mb-1 mb-md-0 text-white" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                        <button type="submit" class="btn btn-@provider.Name.ToLower() btn-block mb-1 mb-md-0 text-white" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
                                             <span class="fab fa-@provider.Name.ToLower() fa-1x"></span> @provider.Name
                                         </button>
                                     </div>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
+                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
                 </div>
                 <div class="form-group">
                     <p>

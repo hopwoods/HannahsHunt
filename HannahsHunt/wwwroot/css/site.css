@@ -6694,6 +6694,12 @@ img#logo {
 .btn-ripple:focus:after {
   visibility: visible; }
 
+.btn.btn-xs {
+  padding: 0.25rem 0.5rem;
+  font-size: 1.00625rem;
+  line-height: 1.1;
+  border-radius: 0; }
+
 .responsive-table td {
   border: none;
   border-bottom: 1px solid #e9ecef;
