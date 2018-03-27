@@ -220,7 +220,7 @@ namespace HannahsHunt.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -230,6 +230,12 @@ namespace HannahsHunt.Controllers
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
+                    //Add Claims HERE!
+                    await _userManager.AddClaimAsync(user, new Claim("FirstName", user.FirstName));
+                    await _userManager.AddClaimAsync(user, new Claim("LastName", user.LastName));
+                    await _userManager.AddClaimAsync(user, new Claim("FullName", user.FullName));
+
+                    //Assign Roles
                     await _userManager.AddToRoleAsync(user, "Basic");
                
                     await _signInManager.SignInAsync(user, isPersistent: false);
@@ -295,7 +301,9 @@ namespace HannahsHunt.Controllers
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLogin", new ExternalLoginViewModel { Email = email });
+                var firstname = info.Principal.FindFirstValue(ClaimTypes.GivenName);
+                var lastname = info.Principal.FindFirstValue(ClaimTypes.Surname);
+                return View("ExternalLogin", new ExternalLoginViewModel { Email = email, FirstName = firstname, LastName = lastname });
             }
         }
 
@@ -312,7 +320,7 @@ namespace HannahsHunt.Controllers
                 {
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -320,6 +328,11 @@ namespace HannahsHunt.Controllers
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
+                        //Add Claims HERE!
+                        await _userManager.AddClaimAsync(user, new Claim("FirstName", user.FirstName));
+                        await _userManager.AddClaimAsync(user, new Claim("LastName", user.LastName));
+                        await _userManager.AddClaimAsync(user, new Claim("FullName", user.FullName));
+
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
                         return RedirectToLocal(returnUrl);

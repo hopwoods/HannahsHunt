@@ -1,55 +1,63 @@
-﻿@{
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@using HannahsHunt.Extensions
+@{
     ViewData["Title"] = "Home Page";
 }
 @section jumbotron {
-        <div class="">
-                <div id="carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active bg-info">
-                            <div class="media">
-                                <img class="mr-4 w-25 align-self-center" src="~/images/bistro-512x512.jpg" alt="The Bistro">
-                                <div class="media-body mr-4 pt-2 bg-info h-100 text-light">
-                                    <h3 class="mt-0">The Bistro</h3>
-                                    <p>Situated at the heart of our Edwardian Quadrangle, the Bistro is a well-loved spot for meeting friends, colleagues and family. The traditional wood panelled room, furnished with a mixture of dining tables and sofas, often features the work of local artists.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item bg-info">
-                            <div class="media">
-                                <img class="mr-4 w-25 align-self-center" src="/images/glamping-512x512.jpg" alt="Accommodation">
-                                <div class="media-body mr-4 pt-2 h-100 text-light">
-                                    <h3 class="mt-0">Accommodation</h3>
-                                    <p>Hannahs offers an exciting range of unique accommodation options to suit all budgets and requirements. Our Seale-Hayne site also makes a beautiful, tranquil and inspiring place to stay, with plenty of things to do in the surrounding area, as well as places to explore. As a guest of Hannahs at Seale-Hayne, you are welcome to take a stroll through our stunning grounds and take full advantage of our other facilities.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item bg-info">
-                            <div class="media">
-                                <img class="mr-4 w-25 align-self-center" src="~/images/the-pantry-512x512.jpg" alt="The Pantry">
-                                <div class="media-body mr-4 pt-2 h-100 text-light">
-                                    <h3 class="mt-0">The Pantry</h3>
-                                    <p>Our takeaway service is a big hit, offering a range of espresso coffee, Miles specialist teas, delicious hot lunches, freshly made baguettes, homemade tray bakes, tasty jacket potatoes and soup to go.</p>
-                                </div>
-                            </div>
+    <div class="">
+        <div id="carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active bg-info">
+                    <div class="media">
+                        <img class="mr-4 w-25 align-self-center" src="~/images/bistro-512x512.jpg" alt="The Bistro">
+                        <div class="media-body mr-4 pt-2 bg-info h-100 text-light">
+                            <h3 class="mt-0">The Bistro</h3>
+                            <p>Situated at the heart of our Edwardian Quadrangle, the Bistro is a well-loved spot for meeting friends, colleagues and family. The traditional wood panelled room, furnished with a mixture of dining tables and sofas, often features the work of local artists.</p>
                         </div>
                     </div>
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel" data-slide-to="1"></li>
-                        <li data-target="#carousel" data-slide-to="2"></li>
-                    </ol>
-                    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                </div>
+                <div class="carousel-item bg-info">
+                    <div class="media">
+                        <img class="mr-4 w-25 align-self-center" src="/images/glamping-512x512.jpg" alt="Accommodation">
+                        <div class="media-body mr-4 pt-2 h-100 text-light">
+                            <h3 class="mt-0">Accommodation</h3>
+                            <p>Hannahs offers an exciting range of unique accommodation options to suit all budgets and requirements. Our Seale-Hayne site also makes a beautiful, tranquil and inspiring place to stay, with plenty of things to do in the surrounding area, as well as places to explore. As a guest of Hannahs at Seale-Hayne, you are welcome to take a stroll through our stunning grounds and take full advantage of our other facilities.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item bg-info">
+                    <div class="media">
+                        <img class="mr-4 w-25 align-self-center" src="~/images/the-pantry-512x512.jpg" alt="The Pantry">
+                        <div class="media-body mr-4 pt-2 h-100 text-light">
+                            <h3 class="mt-0">The Pantry</h3>
+                            <p>Our takeaway service is a big hit, offering a range of espresso coffee, Miles specialist teas, delicious hot lunches, freshly made baguettes, homemade tray bakes, tasty jacket potatoes and soup to go.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <ol class="carousel-indicators">
+                <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel" data-slide-to="1"></li>
+                <li data-target="#carousel" data-slide-to="2"></li>
+            </ol>
+            <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
 }
-<h1 class="display-4">Hannah's Hunt</h1>
+<h1 class="display-4">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <span>Hi @User.GetFirstName()! Welcome to</span>
+    }
+    Hannah's Hunt
+</h1>
 <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam volutpat leo at diam ullamcorper fermentum. Quisque lacinia maximus nisi vitae molestie. Proin ex ipsum, efficitur non augue vitae, imperdiet placerat eros. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam pellentesque feugiat placerat. Phasellus non turpis ut lorem blandit ultrices. Fusce quis nisl et nulla fermentum porta vitae vel urna. Suspendisse malesuada pulvinar accumsan. Nam maximus interdum orci id imperdiet.
 </p>

@@ -65,6 +65,9 @@ namespace HannahsHunt.Controllers
                 usersWithRoles.Add(new UsersWithRolesViewModel()
                 {
                     Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    FullName = user.FullName,
                     UserName = user.UserName,
                     Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
@@ -99,7 +102,7 @@ namespace HannahsHunt.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -109,7 +112,13 @@ namespace HannahsHunt.Controllers
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    if(model.IsAdmin == true)
+
+                    //Add Claims HERE!
+                    await _userManager.AddClaimAsync(user, new Claim("FirstName", user.FirstName));
+                    await _userManager.AddClaimAsync(user, new Claim("LastName", user.LastName));
+                    await _userManager.AddClaimAsync(user, new Claim("FullName", user.FullName));
+
+                    if (model.IsAdmin == true)
                     {
                         await _userManager.AddToRoleAsync(user, "Administrator");
                     } else

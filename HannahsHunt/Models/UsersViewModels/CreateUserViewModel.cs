@@ -9,6 +9,14 @@ namespace HannahsHunt.Models.UsersViewModels
     public class CreateUserViewModel
     {
         [Required]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
