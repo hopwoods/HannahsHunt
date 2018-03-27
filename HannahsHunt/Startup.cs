@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
 using System.Security.Claims;
-//using static HannahsHunt.Extensions.HannahsClaimsPrincipalFactory;
+
 
 namespace HannahsHunt
 {
