@@ -1,58 +1,60 @@
 ﻿@model IEnumerable<HannahsHunt.Models.UsersViewModels.UsersWithRolesViewModel>
-    @{
+@{
     ViewData["Title"] = "View";
-    }
+}
 
-    <h2>Manage Users</h2>
-    <div class="row mb-5">
-        <div class="col-md-9">Manage users of Hannah's Hunt. Create, Edit, or Delete.</div>
-        <div class="col-md-3 mt-4 mt-md-0">
-            <button asp-controller="Users" asp-action="Create" class="btn btn-primary" onclick="location.href='@Url.Action("Create","Users")'">Add New User</button>
-        </div>
+<h2>Manage Users</h2>
+<div class="row mb-5">
+    <div class="col-md-9">Manage users of Hannah's Hunt. Create, Edit, or Delete.</div>
+    <div class="col-md-3 mt-4 mt-md-0 text-right">
+        <button asp-controller="Users" asp-action="Create" class="btn btn-primary" onclick="location.href='@Url.Action("Create","Users")'">Add New User</button>
     </div>
-        <div class="responsive-table row mt-5">
-            <table class="col-md-12 table-hover table-sm">
-                <thead class="">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.FullName)
-                        </th>
-                        @*<th>
+</div>
+<div class="row mt-5">
+    <div class="responsive-table col-md-12 ">
+        <table class="table table-sm">
+            <thead class="">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FullName)
+                    </th>
+                    @*<th>
                             @Html.DisplayNameFor(model => model.UserName)
                         </th>*@
-                        <th>
-                            @Html.DisplayNameFor(model => model.Email)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Roles)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Roles)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
                     <tr>
                         <td data-title="@Html.DisplayNameFor(model => model.FullName)">
                             @Html.DisplayFor(modelItem => item.FullName)
                         </td>
                         @*<td data-title="@Html.DisplayNameFor(model => model.UserName)">
-                            @Html.DisplayFor(modelItem => item.UserName)
-                        </td>*@
+                                @Html.DisplayFor(modelItem => item.UserName)
+                            </td>*@
                         <td data-title="@Html.DisplayNameFor(model => model.Email)">
                             @Html.DisplayFor(modelItem => item.Email)
                         </td>
                         <td data-title="@Html.DisplayNameFor(model => model.Roles)">
                             @Html.DisplayFor(modelItem => item.Roles)
                         </td>
-                        <td class="" data-title="">
+                        <td class="text-right" data-title="">
                             <button asp-action="Edit" asp-route-id="@item.Id" class="btn btn-xs btn-primary">Edit</button>
                             <button asp-action="Details" asp-route-id="@item.Id" class="btn btn-xs btn-info">Details</button>
                             <button asp-action="Delete" asp-route-id="@item.Id" class="btn btn-xs btn-danger">Delete</button>
                         </td>
                     </tr>
-                    }
-                </tbody>
-            </table>
+                }
+            </tbody>
+        </table>
     </div>
+</div>
 
