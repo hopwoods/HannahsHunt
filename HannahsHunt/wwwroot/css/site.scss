@@ -20,7 +20,7 @@
     }
 }
 
-@mixin push--auto {
+@mixin push-auto {
     margin: {
         left: auto;
         right: auto;
@@ -72,6 +72,11 @@ h1, h2, h3, h4, h5, h6 {
     font-family: "Roboto";
 }
 
+//Utilities
+
+.push-auto {
+    @include push-auto();
+}
 
 .o-100 {
     @include Opacity(1);
