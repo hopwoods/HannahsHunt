@@ -43,7 +43,7 @@ $gray-100: #efefef;
 
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|Roboto:300');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|Roboto:300,400,700');
 $font-family-base: "IBM Plex Sans Condensed";
 $font-size-base: 1.15rem;
 
@@ -69,7 +69,8 @@ $navbar-dark-hover-color: rgba($white, .85);
 
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
 }
 
 //Utilities
@@ -138,14 +139,27 @@ img#logo {
     color: $navbar-dark-hover-color;
 }
 
+//Social Bar
+
+#SocialBar {
+    font-size: 1.4rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+}
+
+//Footer
+
+
 //Buttons
 
 .btn, .nav-link {
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
 }
 
 .btn {
     font-family: "Roboto", sans-serif;
+    font-weight: 300;
     display: inline-block;
     padding: 6px 16px;
     line-height: 1.42857143;

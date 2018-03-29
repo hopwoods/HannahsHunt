@@ -1,4 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|Roboto:300");
+﻿@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|Roboto:300,400,700");
 /*!
  * Bootstrap v4.0.0 (https://getbootstrap.com)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -6580,7 +6580,8 @@ a.text-twitter:hover, a.text-twitter:focus {
     border: 1px solid #ddd !important; } }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Roboto"; }
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
 
 .push-auto {
   margin-left: auto;
@@ -6636,11 +6637,18 @@ img#logo {
 .navbar-dark .navbar-nav .nav-link:hover {
   color: rgba(255, 255, 255, 0.85); }
 
+#SocialBar {
+  font-size: 1.4rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400; }
+
 .btn, .nav-link {
-  font-family: "Roboto"; }
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; }
 
 .btn {
   font-family: "Roboto", sans-serif;
+  font-weight: 300;
   display: inline-block;
   padding: 6px 16px;
   line-height: 1.42857143;
