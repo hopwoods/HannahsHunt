@@ -16,6 +16,14 @@ accessibility:
     - universal-access
     - wheelchair
   label: Accessibility
+animals:
+  icons:
+    - kiwi-bird
+    - frog
+    - crow
+    - dove
+    - feather
+  label: Animals
 arrows:
   icons:
     - angle-double-down
@@ -127,7 +135,10 @@ audio-video:
     - forward
     - headphones
     - microphone
+    - microphone-alt
     - microphone-slash
+    - microphone-alt-slash
+    - broadcast-tower
     - music
     - pause
     - pause-circle
@@ -154,8 +165,21 @@ audio-video:
     - volume-down
     - youtube
   label: Audio & Video
+buildings:
+  icons:
+    - school
+    - church
+    - hospital
+    - building
+    - hospital-alt
+    - home
+    - industry
+    - university
+  label: Buildings
 business:
   icons:
+    - project-diagram
+    - stream
     - address-book
     - address-card
     - archive
@@ -199,6 +223,9 @@ business:
     - pencil-alt
     - percent
     - phone
+    - wallet
+    - glasses
+    - phone-slash
     - phone-square
     - phone-volume
     - registered
@@ -213,6 +240,48 @@ business:
     - thumbtack
     - trademark
   label: Business
+charity:
+  icons:
+    - dollar-sign
+    - donate
+    - dove
+    - gift
+    - globe
+    - hand-holding-heart
+    - hand-holding-usd
+    - hands-helping
+    - handshake
+    - heart
+    - leaf
+    - parachute-box
+    - piggy-bank
+    - ribbon
+    - seedling
+  label: Charity
+  sponsored:
+    label: The us-Sunnah Foundation
+    url: 'https://www.ussunnah.org'
+chat:
+  icons:
+    - comment
+    - comment-alt
+    - comment-dots
+    - comment-slash
+    - comments
+    - phone
+    - phone-slash
+    - poo
+    - quote-left
+    - quote-right
+    - smile
+    - video
+    - video-slash
+    - meh
+    - frown
+  label: Chat
+  sponsored:
+    label: Rocket.Chat
+    url: 'https://rocket.chat'
 chess:
   icons:
     - chess
@@ -232,6 +301,8 @@ code:
     - bath
     - bug
     - code
+    - project-diagram
+    - stream
     - code-branch
     - coffee
     - file
@@ -255,11 +326,13 @@ code:
   label: Code
 communication:
   icons:
+    - broadcast-tower
     - address-book
     - address-card
     - american-sign-language-interpreting
     - assistive-listening-systems
     - at
+    - chalkboard
     - bell
     - bell-slash
     - bluetooth
@@ -275,11 +348,14 @@ communication:
     - inbox
     - language
     - microphone
+    - microphone-alt
     - microphone-slash
+    - microphone-alt-slash
     - mobile
     - mobile-alt
     - paper-plane
     - phone
+    - phone-slash
     - phone-square
     - phone-volume
     - rss
@@ -289,7 +365,10 @@ communication:
   label: Communication
 computers:
   icons:
+    - database
     - desktop
+    - memory
+    - stream
     - download
     - headphones
     - hdd
@@ -317,7 +396,12 @@ currency:
     - gg
     - gg-circle
     - lira-sign
+    - money-bill
+    - money-bill-wave
     - money-bill-alt
+    - money-bill-wave-alt
+    - money-check
+    - money-check-alt
     - pound-sign
     - ruble-sign
     - rupee-sign
@@ -360,6 +444,9 @@ design:
     - paint-brush
     - paste
     - pencil-alt
+    - ruler-horizontal
+    - ruler-vertical
+    - ruler-combined
     - save
     - tint
   label: Design
@@ -421,6 +508,9 @@ editors:
     - undo
     - undo-alt
     - unlink
+    - wrench
+    - screwdriver
+    - glasses
   label: Editors
 files:
   icons:
@@ -477,6 +567,9 @@ hands:
     - handshake
     - thumbs-down
     - thumbs-up
+    - hand-holding
+    - hands
+    - allergies
   label: Hands
 health:
   icons:
@@ -510,6 +603,8 @@ images:
     - id-card
     - image
     - images
+    - portrait
+    - chalkboard
     - sliders-h
     - tint
   label: Images
@@ -581,6 +676,7 @@ interfaces:
     - magic
     - meh
     - microphone
+    - microphone-alt
     - microphone-slash
     - minus
     - minus-circle
@@ -590,6 +686,7 @@ interfaces:
     - plus
     - plus-circle
     - plus-square
+    - poo
     - qrcode
     - question
     - question-circle
@@ -642,8 +739,12 @@ interfaces:
     - undo-alt
     - upload
     - user
+    - user-alt
     - user-circle
     - wifi
+    - wrench
+    - screwdriver
+    - glasses
   label: Interfaces
 logistics:
   icons:
@@ -658,6 +759,9 @@ logistics:
     - clipboard-list
     - clipboard-check
   label: Logistics
+  sponsored:
+    label: StayLinked
+    url: 'https://www.staylinked.com'
 maps:
   icons:
     - ambulance
@@ -674,6 +778,7 @@ maps:
     - blind
     - bomb
     - book
+    - shoe-prints
     - bookmark
     - briefcase
     - building
@@ -684,6 +789,7 @@ maps:
     - eye
     - eye-slash
     - fighter-jet
+    - helicopter
     - fire
     - fire-extinguisher
     - flag
@@ -720,6 +826,7 @@ maps:
     - map-pin
     - map-signs
     - medkit
+    - money-bill
     - money-bill-alt
     - motorcycle
     - music
@@ -762,28 +869,83 @@ maps:
     - university
     - utensil-spoon
     - utensils
+    - wine-glass
     - wheelchair
     - wifi
     - wrench
   label: Maps
+mathematics:
+  icons:
+    - plus
+    - minus
+    - times
+    - divide
+    - percentage
+    - equals
+    - not-equal
+    - greater-than
+    - less-than
+    - less-than-equal
+    - greater-than-equal
+    - subscript
+    - superscript
+  label: Mathematics
 medical:
   icons:
+    - allergies
     - ambulance
     - band-aid
+    - briefcase-medical
+    - burn
+    - capsules
+    - diagnoses
     - dna
+    - file-medical
+    - file-medical-alt
     - first-aid
     - heart
     - heartbeat
     - hospital
+    - hospital-alt
     - hospital-symbol
+    - id-card-alt
+    - notes-medical
     - pills
     - plus
+    - prescription-bottle
+    - prescription-bottle-alt
+    - procedures
+    - smoking
     - stethoscope
     - syringe
+    - tablets
     - thermometer
     - user-md
+    - vial
+    - vials
     - weight
+    - x-ray
   label: Medical
+  sponsored:
+    label: Harvard Medical School
+    url: 'https://hms.harvard.edu'
+moving:
+  icons:
+    - truck-moving
+    - truck-loading
+    - tape
+    - box-open
+    - sign
+    - couch
+    - people-carry
+    - dolly
+    - wine-glass
+    - suitcase
+    - archive
+  label: Moving
+  sponsored:
+    label: HireAHelper
+    url: 'https://www.hireahelper.com'
 objects:
   icons:
     - ambulance
@@ -791,6 +953,9 @@ objects:
     - archive
     - balance-scale
     - bath
+    - stroopwafel
+    - blender
+    - glasses
     - bed
     - beer
     - bell
@@ -812,6 +977,7 @@ objects:
     - camera
     - camera-retro
     - car
+    - helicopter
     - clipboard
     - cloud
     - coffee
@@ -849,6 +1015,8 @@ objects:
     - headphones
     - heart
     - home
+    - church
+    - school
     - hospital
     - hourglass
     - image
@@ -873,8 +1041,30 @@ objects:
     - medkit
     - microchip
     - microphone
+    - microphone-alt
     - mobile
     - mobile-alt
+    - money-bill
+    - screwdriver
+    - toolbox
+    - broadcast-tower
+    - dice
+    - dice-one
+    - dice-two
+    - dice-three
+    - dice-four
+    - dice-five
+    - dice-six
+    - ruler-horizontal
+    - ruler-vertical
+    - ruler-combined
+    - door-open
+    - door-closed
+    - wallet
+    - money-check
+    - money-check-alt
+    - memory
+    - money-bill
     - money-bill-alt
     - moon
     - motorcycle
@@ -929,6 +1119,7 @@ objects:
     - utensil-spoon
     - utensils
     - wheelchair
+    - wine-glass
     - wrench
   label: Objects
 payments-shopping:
@@ -954,6 +1145,8 @@ payments-shopping:
     - cc-stripe
     - cc-visa
     - credit-card
+    - money-check
+    - money-check-alt
     - ethereum
     - gem
     - gift
@@ -1009,6 +1202,7 @@ sports:
     - baseball-ball
     - basketball-ball
     - bowling-ball
+    - dumbbell
     - football-ball
     - futbol
     - golf-ball
@@ -1028,6 +1222,9 @@ status:
     - bell
     - bell-slash
     - calendar
+    - door-open
+    - door-closed
+    - stream
     - calendar-alt
     - calendar-check
     - calendar-minus
@@ -1078,24 +1275,44 @@ users-people:
     - address-book
     - address-card
     - bed
+    - chalkboard-teacher
     - blind
     - child
     - female
     - frown
     - id-badge
     - id-card
+    - id-card-alt
     - male
     - meh
+    - poo
+    - portrait
     - power-off
     - smile
     - street-view
     - user
+    - user-alt
     - user-circle
     - user-md
     - user-plus
     - user-secret
     - user-times
     - users
+    - user-astronaut
+    - user-check
+    - user-clock
+    - user-cog
+    - user-edit
+    - user-friends
+    - user-graduate
+    - user-lock
+    - user-minus
+    - user-ninja
+    - user-shield
+    - user-slash
+    - user-tag
+    - user-tie
+    - user-alt-slash
     - wheelchair
   label: Users & People
 vehicles:
@@ -1118,6 +1335,7 @@ vehicles:
     - train
     - truck
     - wheelchair
+    - helicopter
   label: Vehicles
 writing:
   icons:
