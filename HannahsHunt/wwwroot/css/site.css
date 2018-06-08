@@ -6645,6 +6645,17 @@ img#logo {
 #SocialBar a {
   font-size: 1.8rem; }
 
+footer a {
+  color: #fff !important; }
+
+footer a:hover {
+  color: #adb5bd !important;
+  text-decoration: none; }
+
+footer a.btn:hover {
+  color: #fff !important;
+  text-decoration: none; }
+
 .btn, .nav-link {
   font-family: "Roboto", sans-serif;
   font-weight: 300; }

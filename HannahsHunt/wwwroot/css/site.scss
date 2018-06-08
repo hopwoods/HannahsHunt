@@ -146,10 +146,25 @@ img#logo {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
 }
+
 #SocialBar a {
     font-size: 1.8rem;
 }
 //Footer
+footer a {
+    color: $white !important;
+}
+footer a:hover {
+    color: $gray-500 !important;
+    text-decoration: none;
+}
+footer a.btn:hover {
+    color: $white !important;
+    text-decoration: none;
+}
+
+
+
 //Buttons
 .btn, .nav-link {
     font-family: "Roboto", sans-serif;
@@ -396,19 +411,19 @@ div.validation-summary-errors ul {
         border: 0;
         border-left: 1px solid $gray-400;
         border-right: 1px solid $gray-400;
-        }
+    }
 
     .responsive-table tr:hover {
         background-color: $gray-100;
     }
-    
+
     .responsive-table tr:first-child {
         border-top: 1px solid $gray-400;
     }
 
     .responsive-table tr:last-of-type {
         border-bottom: 1px solid $gray-400;
-    }   
+    }
 
     .responsive-table td {
         /* Behave  like a "row" */
@@ -439,6 +454,5 @@ div.validation-summary-errors ul {
 	Label the data
 	*/
     .responsive-table td:before {
-        
     }
 }
