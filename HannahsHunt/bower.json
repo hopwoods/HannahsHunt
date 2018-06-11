@@ -19,32 +19,45 @@
       "/[sc|le]ss$/": "wwwroot/css"
     },
     "sources": {
-        "jQuery": [
-            "bower_components/jquery/dist/jquery.slim.js",
-            "bower_components/jquery/dist/jquery.slim.min.js"
-        ],
-        "bootstrap": [
-            "bower_components/bootstrap/dist/js/bootstrap.min.js"
-        ],
-        "font-awesome": [
-            "bower_components/font-awesome/svg-with-js/js/fontawesome-all.js"
-        ],
-        "moment": [
-            "bower_components/moment/src/moment.js"
-        ],
-        "pineapple-sass": [
-            "bower_components/pineapple-sass/build/_pineapple-sass.scss"
-        ]
+      "jQuery": [
+        "bower_components/jquery/dist/jquery.slim.js",
+        "bower_components/jquery/dist/jquery.slim.min.js"
+      ],
+      "bootstrap": [
+        "bower_components/bootstrap/dist/js/bootstrap.min.js"
+      ],
+      "font-awesome": [
+        "bower_components/font-awesome/svg-with-js/js/fontawesome-all.js"
+      ],
+      "moment": [
+        "bower_components/moment/src/moment.js"
+      ],
+      "pineapple-sass": [
+        "bower_components/pineapple-sass/build/_pineapple-sass.scss"
+      ],
+      "jquery-validation": [
+        "bower_components/jquery-validation/dist/jquery.validate.js",
+        "bower_components/jquery-validation/dist/jquery.validate.min.js"
+      ],
+      "jquery-validation-unobtrusive": [
+        "bower_components/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+        "bower_components/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+      ]
     }
   },
   "dependencies": {
-    "bootstrap": "v4.0.0",
-    "font-awesome": "5.0.8",
+    "bootstrap": "v4.1.1",
+    "font-awesome": "5.0.13",
     "jQuery": "3.3.1",
-    "moment": "2.21.0",
-    "pineapple-sass": "v1.11.15"
+    "moment": "2.22.2",
+    "pineapple-sass": "v1.11.15",
+    "jquery-validation": "1.17.0",
+    "jquery-validation-unobtrusive": "v3.2.10"
   },
   "resolutions": {
-    "font-awesome": "5.0.8"
+    "font-awesome": "5.0.13",
+    "bootstrap": "v4.1.1",
+    "jquery-validation-unobtrusive": "v3.2.10",
+    "moment": "2.22.2"
   }
 }

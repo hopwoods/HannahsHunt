@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using HannahsHunt.Models;
 using HannahsHunt.Models.ManageViewModels;
 using HannahsHunt.Services;
+using System.Security.Claims;
 
 namespace HannahsHunt.Controllers
 {
@@ -57,6 +58,8 @@ namespace HannahsHunt.Controllers
 
             var model = new IndexViewModel
             {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 Username = user.UserName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
@@ -77,15 +80,94 @@ namespace HannahsHunt.Controllers
             }
 
             var user = await _userManager.GetUserAsync(User);
+            //Create User Object from Model
+            var newuserdetails = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber };
+
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var email = user.Email;
-            if (model.Email != email)
+            //Get the Users current claims
+            var claims = await _userManager.GetClaimsAsync(user);
+
+            //Update the First Name and First Name Claim
+            var firstname = user.FirstName;
+            if (newuserdetails.FirstName != firstname)
             {
-                var setEmailResult = await _userManager.SetEmailAsync(user, model.Email);
+                user.FirstName = model.FirstName;
+                // Remove existing claim and replace with a new value
+                if(claims.FirstOrDefault(c => c.Type == "FirstName") != null)
+                {
+                    await _userManager.RemoveClaimAsync(user, claims.FirstOrDefault(c => c.Type == "FirstName"));
+                    var setFirstNameResult = await _userManager.AddClaimAsync(user, new Claim("FirstName", newuserdetails.FirstName));
+
+                    if (!setFirstNameResult.Succeeded)
+                    {
+                        throw new ApplicationException($"Unexpected error occurred setting First Name for user with ID '{user.Id}'.");
+                    }
+                } else
+                {
+                    var setFirstNameResult = await _userManager.AddClaimAsync(user, new Claim("FirstName", newuserdetails.FirstName));
+
+                    if (!setFirstNameResult.Succeeded)
+                    {
+                        throw new ApplicationException($"Unexpected error occurred setting First Name for user with ID '{user.Id}'.");
+                    }
+                }
+                
+            }
+
+            //Update the Last Name and Last Name claim
+            var lastname = user.LastName;
+            if (newuserdetails.LastName != lastname)
+            {
+                user.LastName = model.LastName;
+                // Remove existing claim and replace with a new value
+                if (claims.FirstOrDefault(c => c.Type == "LastName") != null)
+                {
+                    await _userManager.RemoveClaimAsync(user, claims.FirstOrDefault(c => c.Type == "LastName"));
+                    var setLastNameResult = await _userManager.AddClaimAsync(user, new Claim("LastName", newuserdetails.LastName));
+
+                    if (!setLastNameResult.Succeeded)
+                    {
+                        throw new ApplicationException($"Unexpected error occurred setting Last Name for user with ID '{user.Id}'.");
+                    }
+                } else
+                {
+                    var setLastNameResult = await _userManager.AddClaimAsync(user, new Claim("LastName", newuserdetails.LastName));
+
+                    if (!setLastNameResult.Succeeded)
+                    {
+                        throw new ApplicationException($"Unexpected error occurred setting Last Name for user with ID '{user.Id}'.");
+                    }
+                }
+                    
+            }
+
+            //Update the Full Name claim
+            if (claims.FirstOrDefault(c => c.Type == "FullName") != null)
+            {
+                await _userManager.RemoveClaimAsync(user, claims.FirstOrDefault(c => c.Type == "FullName"));
+                var setFullNameResult = await _userManager.AddClaimAsync(user, new Claim("FullName", newuserdetails.FullName));
+                if (!setFullNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting Full Name for user with ID '{user.Id}'.");
+                }
+            } else
+            {
+                var setFullNameResult = await _userManager.AddClaimAsync(user, new Claim("FullName", newuserdetails.FullName));
+                if (!setFullNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting Full Name for user with ID '{user.Id}'.");
+                }
+            }
+                
+
+            var email = user.Email;
+            if (newuserdetails.Email != email)
+            {
+                var setEmailResult = await _userManager.SetEmailAsync(user, newuserdetails.Email);
                 if (!setEmailResult.Succeeded)
                 {
                     throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
@@ -93,14 +175,16 @@ namespace HannahsHunt.Controllers
             }
 
             var phoneNumber = user.PhoneNumber;
-            if (model.PhoneNumber != phoneNumber)
+            if (newuserdetails.PhoneNumber != phoneNumber)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
+                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, newuserdetails.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
                 }
             }
+            // Re-Signin User to reflect the change in the Identity cookie
+            await _signInManager.SignInAsync(user, isPersistent: false);
 
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));

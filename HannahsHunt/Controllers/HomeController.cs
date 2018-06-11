@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HannahsHunt.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
-        [Authorize]
+        
         public IActionResult Index()
         {
             return View();

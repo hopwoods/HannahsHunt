@@ -1,24 +1,4 @@
-﻿//Bootstrap Options
-$enable-shadows: true;
-$enable-gradients: true;
-
-//Theme Colors
-$theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "dark": #001e45, "danger": #e82c2a, "gray": #333333, "happy": #ff5500);
-$border-radius: 0em;
-$btn-box-shadow: 0;
-$btn-border-radius-lg: 0;
-$btn-border-radius-sm: 0;
-
-//Imports
-@import "bootstrap/scss/bootstrap.scss";
-@import "pineapple-sass/_pineapple-sass.scss";
-
-//Bootstrap Varible Overides
-$navbar-dark-color: rgba($white, .75);
-$navbar-dark-hover-color: rgba($white, .85);
-
-
-//utilities
+﻿//utilities
 @mixin Opacity($value) {
     $IEValue: $value*100;
     opacity: $value;
@@ -26,25 +6,95 @@ $navbar-dark-hover-color: rgba($white, .85);
     filter: alpha(opacity=$IEValue);
 }
 
-@mixin push--auto {
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+    padding: $padding-y $padding-x;
+    font-size: $font-size;
+    line-height: $line-height;
+    // Manually declare to provide an override to the browser default
+    @if $enable-rounded {
+        border-radius: $border-radius;
+    }
+    @else {
+        border-radius: 0;
+    }
+}
+
+@mixin push-auto {
     margin: {
         left: auto;
         right: auto;
     }
 }
 
+
+//Bootstrap Options
+$enable-shadows: true;
+$enable-gradients: false;
+
+//Theme Colors
+$theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "dark": #001e45, "danger": #e82c2a, "gray": #333333, "happy": #ff5500, "facebook": #3e5b98, "google": #4285f4, "twitter": #55ACEE);
+$border-radius: 0em;
+$btn-box-shadow: 0;
+$btn-border-radius-lg: 0;
+$btn-border-radius-sm: 0;
+
+$gray-100: #efefef;
+
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|Roboto:300,400,700');
+$font-family-base: "IBM Plex Sans Condensed";
+$font-size-base: 1.15rem;
+
+// Buttons
+
+$btn-padding-x-xs: .50rem !default;
+$btn-padding-y-xs: .25rem !default;
+$input-btn-line-height-xs: 1.1 !default;
+
+$input-btn-padding-y: 0.75rem;
+$input-btn-padding-x: 1.5rem;
+$input-btn-line-height: 1.4;
+
+
+//Imports
+@import "bootstrap/scss/bootstrap.scss";
+@import "pineapple-sass/_pineapple-sass.scss";
+
+
+//Bootstrap Varible Overides
+$navbar-dark-color: rgba($white, .75);
+$navbar-dark-hover-color: rgba($white, .85);
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+}
+
+//Utilities
+
+.push-auto {
+    @include push-auto();
+}
+
 .o-100 {
     @include Opacity(1);
 }
+
 .o-75 {
     @include Opacity(0.75);
 }
+
 .o-50 {
     @include Opacity(0.50);
 }
+
 .o-25 {
     @include Opacity(0.25);
 }
+
 .o-0 {
     @include Opacity(0.00);
 }
@@ -53,15 +103,19 @@ $navbar-dark-hover-color: rgba($white, .85);
 //Structure
 body {
     color: $gray-800;
-    font-family: sans-serif;
+}
+
+#Jumbotron {
+    margin-top: 4.8rem;
+    box-shadow: rgba(0,0,0,0.4) 0 2px 6px;
 }
 
 #MainContent {
-    margin-top: 2rem;
+    margin-top: 6rem;
 }
 
 #carousel .carousel-item {
-    font-size: 0.9rem;
+    font-size: $font-size-base * 0.9;
 }
 
 img#logo {
@@ -69,6 +123,10 @@ img#logo {
 }
 
 //Navbar
+.navbar {
+    box-shadow: rgba(0,0,0,0.4) 0 2px 6px;
+}
+
 .navbar-dark {
     //@include box-shadow(0px,1px,4px,$gray-800);
 }
@@ -76,9 +134,123 @@ img#logo {
 .navbar-dark .navbar-nav .nav-link {
     color: $navbar-dark-color;
 }
+
 .navbar-dark .navbar-nav .nav-link:hover {
     color: $navbar-dark-hover-color;
 }
+
+//Social Bar
+
+#SocialBar {
+    font-size: 1.4rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+}
+
+#SocialBar a {
+    font-size: 1.8rem;
+}
+//Footer
+footer a {
+    color: $white !important;
+}
+footer a:hover {
+    color: $gray-500 !important;
+    text-decoration: none;
+}
+footer a.btn:hover {
+    color: $white !important;
+    text-decoration: none;
+}
+
+
+
+//Buttons
+.btn, .nav-link {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+}
+
+.btn {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    display: inline-block;
+    padding: 6px 16px;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 2px;
+    outline: 0;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:active {
+        box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4);
+    }
+}
+
+
+/* Ripple */
+.btn-ripple {
+    overflow: hidden;
+    position: relative;
+}
+
+.btn-ripple:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 120px;
+    height: 120px;
+    margin-left: -60px;
+    margin-top: -60px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 100%;
+    transform: scale(0);
+}
+
+@keyframes btn-ripple {
+    0% {
+        transform: scale(0);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+.btn-ripple:not(:active):after {
+    animation: md-btn-ripple 0.6s ease-out;
+}
+
+.btn-ripple:after {
+    visibility: hidden;
+}
+
+.btn-ripple:focus:after {
+    visibility: visible;
+}
+
+.btn.btn-xs {
+    // line-height: ensure proper height of button next to small input
+    @include button-size($btn-padding-y-xs, $btn-padding-x-xs, $font-size-sm, $input-btn-line-height-xs, $btn-border-radius-sm);
+}
+
 
 //Responsive Tables
 
@@ -88,11 +260,136 @@ img#logo {
     white-space: normal;
     text-align: left;
     min-height: 2.4rem;
-    line-height: $line-height-base
+    line-height: $line-height-base;
 }
 
-@media only screen and (max-width: 800px) {
+// Forms
+form {
+    color: $gray-700;
+}
 
+.checkbox label:after,
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+}
+
+.radio .cr {
+    border-radius: 50%;
+}
+
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 20%;
+    left: 15%;
+}
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+}
+
+// Login Page
+.login {
+    margin: 0 auto;
+}
+
+.login h5 {
+    text-align: center;
+    line-height: 300%;
+}
+
+.login-or {
+    position: relative;
+    font-size: 18px;
+    color: #aaa;
+    top: 12px;
+}
+
+.span-or {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    margin-left: -25px;
+    background-color: #fff;
+    width: 50px;
+    text-align: center;
+}
+
+.hr-or {
+    background-color: #cdcdcd;
+    height: 1px;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+div.validation-summary-errors ul {
+    list-style: none;
+    list-style-type: none;
+    list-style-position: outside;
+    margin: 0.1rem;
+    padding-left: 0;
+}
+
+/* Validation */
+.validation-summary-valid {
+    display: none;
+}
+
+.validation-summary-errors {
+    display: block;
+}
+
+div.validation-summary-errors svg {
+    position: relative;
+    top: 0;
+}
+
+div.validation-summary-errors ul {
+    display: inline-block;
+}
+
+/* Responsive Tables */
+@media only screen and (max-width: 800px) {
     /* Force table to not be like tables anymore */
     .responsive-table table,
     .responsive-table thead,
@@ -101,8 +398,8 @@ img#logo {
     .responsive-table td,
     .responsive-table tr {
         display: block;
+        border-collapse: collapse;
     }
-
     /* Hide table headers (but not display: none;, for accessibility) */
     .responsive-table thead tr {
         position: absolute;
@@ -111,7 +408,21 @@ img#logo {
     }
 
     .responsive-table tr {
-        border: 1px solid #ccc;
+        border: 0;
+        border-left: 1px solid $gray-400;
+        border-right: 1px solid $gray-400;
+    }
+
+    .responsive-table tr:hover {
+        background-color: $gray-100;
+    }
+
+    .responsive-table tr:first-child {
+        border-top: 1px solid $gray-400;
+    }
+
+    .responsive-table tr:last-of-type {
+        border-bottom: 1px solid $gray-400;
     }
 
     .responsive-table td {
@@ -137,13 +448,11 @@ img#logo {
         white-space: nowrap;
         text-align: left;
         font-weight: bold;
+        content: attr(data-title);
     }
-
     /*
 	Label the data
 	*/
     .responsive-table td:before {
-        content: attr(data-title);
     }
 }
-

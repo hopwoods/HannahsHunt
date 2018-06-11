@@ -14,6 +14,8 @@ using HannahsHunt.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
+using System.Security.Claims;
+
 
 namespace HannahsHunt
 {
@@ -47,6 +49,8 @@ namespace HannahsHunt
             {
                 UserName = Configuration["Authentication:HannahsHunt:AdminUserName"],
                 Email = Configuration["Authentication:HannahsHunt:AdminUserEmail"],
+                FirstName = Configuration["Authentication:HannahsHunt:AdminUserFirstName"],
+                LastName = Configuration["Authentication:HannahsHunt:AdminUserLastName"]
             };
             //Ensure you have these values in your appsettings.json file
             string userPWD = Configuration["Authentication:HannahsHunt:AdminUserPassword"];
@@ -57,6 +61,11 @@ namespace HannahsHunt
                 var createPowerUser = await UserManager.CreateAsync(poweruser, userPWD);
                 if (createPowerUser.Succeeded)
                 {
+
+                    await UserManager.AddClaimAsync(poweruser, new Claim("FirstName", poweruser.FirstName));
+                    await UserManager.AddClaimAsync(poweruser, new Claim("LastName", poweruser.LastName));
+                    await UserManager.AddClaimAsync(poweruser, new Claim("FullName", poweruser.FullName));
+
                     //here we tie the new user to the role
                     await UserManager.AddToRoleAsync(poweruser, "Administrator");
 
@@ -64,7 +73,7 @@ namespace HannahsHunt
             }
         }
 
-        
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -72,6 +81,8 @@ namespace HannahsHunt
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            //services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, Extensions.HannahsClaimsPrincipalFactory>();
 
             services.AddAuthentication().AddGoogle(googleOptions =>
             {
@@ -83,6 +94,12 @@ namespace HannahsHunt
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
+            services.AddAuthentication().AddTwitter(twitterOptions =>
+                        {
+                            twitterOptions.ConsumerKey = Configuration["Authentication:Twitter:ConsumerKey"];
+                            twitterOptions.ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"];
+                        });
+
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
@@ -90,8 +107,13 @@ namespace HannahsHunt
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
+
             services.AddMvc();
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -110,7 +132,9 @@ namespace HannahsHunt
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            CreateRoles(serviceProvider).Wait();
+            var options = new RewriteOptions().AddRedirectToHttps();
+            app.UseRewriter(options);
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc(routes =>
@@ -119,7 +143,7 @@ namespace HannahsHunt
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            CreateRoles(serviceProvider).Wait();
+            
         }
     }
 }
