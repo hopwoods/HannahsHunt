@@ -27,10 +27,9 @@
     }
 }
 
-
-//Bootstrap Options
-$enable-shadows: true;
-$enable-gradients: false;
+@mixin text-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4)) {
+    text-shadow: $x $y $blur $color;
+}
 
 //Theme Colors
 $theme-colors: ( "primary": #588f76, "info": #008ab1, "secondary" : #f58025, "dark": #001e45, "danger": #e82c2a, "gray": #333333, "happy": #ff5500, "facebook": #3e5b98, "google": #4285f4, "twitter": #55ACEE);
@@ -114,8 +113,14 @@ body {
     margin-top: 6rem;
 }
 
+.carousel-inner, .carousel-item{
+    max-height: 25rem !important;
+}
+.carousel-caption {
+    @include text-shadow(2px, 2px, 2px, rgba(0,0,0,1))
+}
 #carousel .carousel-item {
-    font-size: $font-size-base * 0.9;
+    //font-size: $font-size-base * 0.9;
 }
 
 img#logo {
