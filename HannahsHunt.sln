@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HannahsHunt2", "HannahsHunt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hannahs Hunt 2 Stuff", "Hannahs Hunt 2 Stuff", "{85E91EF5-1EB1-4B16-B7AA-63D47BC4C811}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HannahsHunt2", "HannahsHunt2\HannahsHunt2.csproj", "{8F279758-C291-4A36-B8D2-A5F3FA15FEA2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
