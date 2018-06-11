@@ -1,0 +1,14 @@
+{
+  "name": "bcSwipe",
+  "homepage": "https://github.com/Nico-92/bcSwipe",
+  "_release": "b60e6b19b4",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "b60e6b19b4976f6c402b9a7bb3baa6f8fa2160a3"
+  },
+  "_source": "https://github.com/Nico-92/bcSwipe.git",
+  "_target": "*",
+  "_originalSource": "bcSwipe",
+  "_direct": true
+}

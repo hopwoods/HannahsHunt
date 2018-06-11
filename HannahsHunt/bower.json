@@ -24,7 +24,8 @@
         "bower_components/jquery/dist/jquery.slim.min.js"
       ],
       "bootstrap": [
-        "bower_components/bootstrap/dist/js/bootstrap.min.js"
+        "bower_components/bootstrap/dist/js/bootstrap.min.js",
+        "bower_components/bcSwipe/jQuery.bcSwipe.min.js"
       ],
       "font-awesome": [
         "bower_components/font-awesome/svg-with-js/js/fontawesome-all.js"
@@ -52,7 +53,8 @@
     "moment": "2.22.2",
     "pineapple-sass": "v1.11.15",
     "jquery-validation": "1.17.0",
-    "jquery-validation-unobtrusive": "v3.2.10"
+    "jquery-validation-unobtrusive": "v3.2.10",
+    "bcSwipe": "*"
   },
   "resolutions": {
     "font-awesome": "5.0.13",
