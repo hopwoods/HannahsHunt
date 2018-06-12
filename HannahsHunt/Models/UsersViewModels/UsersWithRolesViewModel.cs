@@ -32,8 +32,7 @@ namespace HannahsHunt.Models.UsersViewModels
         [Display(Name = "Email Address")]
         public string Email { get; set; }
 
-
-
+        [Display(Name = "Role(s)")]
         public IList<string> Roles { get; set; }
     }
 }

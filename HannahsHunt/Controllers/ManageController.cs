@@ -114,8 +114,7 @@ namespace HannahsHunt.Controllers
                     {
                         throw new ApplicationException($"Unexpected error occurred setting First Name for user with ID '{user.Id}'.");
                     }
-                }
-                
+                }                
             }
 
             //Update the Last Name and Last Name claim
