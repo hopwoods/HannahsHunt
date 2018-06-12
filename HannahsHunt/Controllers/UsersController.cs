@@ -160,7 +160,8 @@ namespace HannahsHunt.Controllers
             }
         }
 
-        // GET: Administration2/Delete/5
+        // GET: Users/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
             UsersWithRolesViewModel userWithRoles = new UsersWithRolesViewModel();
@@ -178,19 +179,19 @@ namespace HannahsHunt.Controllers
             return View(userWithRoles);
         }
 
-        // POST: Administration2/Delete/5
+        // POST: Users/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(string userId, IFormCollection collection)
+        public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            if (userId == null)
+            if (id == null)
             {
                 return NotFound();
             }
             try
             {
                 //get User Data from Userid
-                var user = await _userManager.FindByIdAsync(userId);
+                var user = await _userManager.FindByIdAsync(id);
 
                 //List Logins associated with user
                 IList<UserLoginInfo> logins = await _userManager.GetLoginsAsync(user);
@@ -216,22 +217,20 @@ namespace HannahsHunt.Controllers
                     //Delete User
                     await _userManager.DeleteAsync(user);
 
-                    _logger.LogInformation("User {0} deleted.",user.Id);
+                    _logger.LogInformation("User {0} deleted.", user.Id);
 
                     TempData["Message"] = "User Deleted Successfully. ";
                     TempData["MessageValue"] = "1";
-                    //transaction.commit();
+                    transaction.Commit();
                 }
                 return RedirectToAction(nameof(Index));
-
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                _logger.LogError("User Deletion Failed: {0}",ex.Message);
+                _logger.LogError("User Deletion Failed: {0}", ex.Message);
 
-                ViewData["ErrorMessage"] = 
-                    "Delete failed. Try again, and if the problem persists " + 
+                ViewData["ErrorMessage"] =
+                    "Delete failed. Try again, and if the problem persists " +
                     "see your system administrator.";
 
                 return View();

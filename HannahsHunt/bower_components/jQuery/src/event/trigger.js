@@ -197,16 +197,3 @@ jQuery.fn.extend( {
 
 return jQuery;
 } );
-;
-		} );
-	},
-	triggerHandler: function( type, data ) {
-		var elem = this[ 0 ];
-		if ( elem ) {
-			return jQuery.event.trigger( type, data, elem, true );
-		}
-	}
-} );
-
-return jQuery;
-} );

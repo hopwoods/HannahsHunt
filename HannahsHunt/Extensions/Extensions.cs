@@ -11,6 +11,11 @@ namespace HannahsHunt.Extensions
 {
     public static class ClaimsPrincipalExtension
     {
+        public static string GetUserId(this ClaimsPrincipal principal)
+        {
+            var userid = principal.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+            return userid?.Value;
+        }
         public static string GetFirstName(this ClaimsPrincipal principal)
         {
             var firstname = principal.Claims.FirstOrDefault(c => c.Type == "FirstName");
