@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections;
 
 namespace HannahsHunt.Controllers
 {
@@ -78,7 +79,6 @@ namespace HannahsHunt.Controllers
             return View(usersWithRoles);
         }
             
-
         // GET: Administration/Details/5
         public ActionResult Details(int id, string returnUrl = null)
         {
@@ -161,24 +161,79 @@ namespace HannahsHunt.Controllers
         }
 
         // GET: Administration2/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            UsersWithRolesViewModel userWithRoles = new UsersWithRolesViewModel();
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+            var roles = await _userManager.GetRolesAsync(user);
+
+            userWithRoles.Id = user.Id;
+            userWithRoles.FirstName = user.FirstName;
+            userWithRoles.LastName = user.LastName;
+            userWithRoles.FullName = user.FullName;
+            userWithRoles.UserName = user.UserName;
+            userWithRoles.Email = user.Email;
+            userWithRoles.PhoneNumber = user.PhoneNumber;
+            userWithRoles.Roles = roles.ToList();            
+            return View(userWithRoles);
         }
 
         // POST: Administration2/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(string userId, IFormCollection collection)
         {
+            if (userId == null)
+            {
+                return NotFound();
+            }
             try
             {
-                // TODO: Add delete logic here
+                //get User Data from Userid
+                var user = await _userManager.FindByIdAsync(userId);
 
+                //List Logins associated with user
+                IList<UserLoginInfo> logins = await _userManager.GetLoginsAsync(user);
+
+                //Gets list of Roles associated with current user
+                var rolesForUser = await _userManager.GetRolesAsync(user);
+
+                using (var transaction = _context.Database.BeginTransaction())
+                {
+                    foreach (var login in logins)
+                    {
+                        await _userManager.RemoveLoginAsync(user, login.LoginProvider, login.ProviderKey);
+                    }
+
+                    if (rolesForUser.Count() > 0)
+                    {
+                        foreach (var item in rolesForUser.ToList())
+                        {
+                            // item should be the name of the role
+                            var result = await _userManager.RemoveFromRoleAsync(user, item);
+                        }
+                    }
+                    //Delete User
+                    await _userManager.DeleteAsync(user);
+
+                    _logger.LogInformation("User {0} deleted.",user.Id);
+
+                    TempData["Message"] = "User Deleted Successfully. ";
+                    TempData["MessageValue"] = "1";
+                    //transaction.commit();
+                }
                 return RedirectToAction(nameof(Index));
+
+
             }
-            catch
+            catch(Exception ex)
             {
+                _logger.LogError("User Deletion Failed: {0}",ex.Message);
+
+                ViewData["ErrorMessage"] = 
+                    "Delete failed. Try again, and if the problem persists " + 
+                    "see your system administrator.";
+
                 return View();
             }
         }

@@ -1,0 +1,15 @@
+﻿@model HannahsHunt.Models.UsersViewModels.UsersWithRolesViewModel
+@{
+    ViewBag.Title = "Delete User";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h5>Are you sure you want to delete the following user?</h5>
+@Model.FullName<br />
+
+@foreach(var role in Model.Roles)
+    {
+        <span>@role</span>
+
+    }
