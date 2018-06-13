@@ -18,6 +18,9 @@
             </button>
         </div>
     }
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
     if (TempData["Message"] != null)
     {
         <div class="alert alert-dismissible alert-success">

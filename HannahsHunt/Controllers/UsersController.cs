@@ -24,7 +24,7 @@ namespace HannahsHunt.Controllers
     [Authorize(Roles="Administrator")]
     public class UsersController : Controller
     {
-
+        #region Initilisation and Context
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -46,15 +46,17 @@ namespace HannahsHunt.Controllers
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
-        }
+        }      
 
         //Clean Up Context
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
         }
+        #endregion
 
-        // GET: Administration
+        #region Index
+        // GET: Users/
         public async Task<IActionResult> Index(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -78,15 +80,19 @@ namespace HannahsHunt.Controllers
             _logger.LogInformation("Users list presented.");
             return View(usersWithRoles);
         }
-            
-        // GET: Administration/Details/5
+        #endregion
+
+        #region User Details
+        // GET: Users/Details/5
         public ActionResult Details(int id, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+        #endregion
 
-        // GET: Administration/Create
+        #region Create Users
+        // GET: Users/Create
         [HttpGet]
         public IActionResult Create(string returnUrl = null)
         {
@@ -94,7 +100,7 @@ namespace HannahsHunt.Controllers
             return View();
         }
 
-        // POST: Administration/Create
+        // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateUserViewModel model, string returnUrl = null)
@@ -136,17 +142,45 @@ namespace HannahsHunt.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+#endregion
 
-        // GET: Administration2/Edit/5
-        public ActionResult Edit(int id)
+        #region Edit Users
+        // GET: Users/Edit/5
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            IList<string> role = await _userManager.GetRolesAsync(user);
+            bool isAdmin = false;
+            foreach(string item in role)
+            {
+                if (item == "Administrator")
+                {
+                    isAdmin = true;
+                }
+            }
+            
+            var model = new EditUserViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                IsAdmin = isAdmin,
+                StatusMessage = null
+            };
+            return View(model);
         }
 
-        // POST: Administration2/Edit/5
+        // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(string id, IFormCollection collection)
         {
             try
             {
@@ -159,12 +193,13 @@ namespace HannahsHunt.Controllers
                 return View();
             }
         }
+        #endregion
 
+        #region Delete Users
         // GET: Users/Delete/5
         [HttpGet]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id, UsersWithRolesViewModel userWithRoles)
         {
-            UsersWithRolesViewModel userWithRoles = new UsersWithRolesViewModel();
             ApplicationUser user = await _userManager.FindByIdAsync(id);
             var roles = await _userManager.GetRolesAsync(user);
 
@@ -178,7 +213,7 @@ namespace HannahsHunt.Controllers
             userWithRoles.Roles = roles.ToList();            
             return View(userWithRoles);
         }
-
+        
         // POST: Users/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -236,6 +271,7 @@ namespace HannahsHunt.Controllers
                 return View();
             }
         }
+        #endregion
 
         #region Helpers
 
