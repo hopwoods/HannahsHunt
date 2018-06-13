@@ -6,9 +6,10 @@
 
     <h2>@ViewBag.Title</h2>
 
-    <h5>Are you sure you want to delete the following user?</h5>
-    <div class="row">
-        <div class="col-lg-6">
+    <h5 class="mb-4">Are you sure you want to delete the following user?</h5>
+    <div class="row justify-content-center">
+        <div class="col-lg-6 ">
+            <h6>User Details</h6>
             <div class="row">
                 <div class="col-md-4 text-primary"><strong>@Html.DisplayNameFor(model => model.FullName)</strong></div>
                 <div class="col-md-8">@Model.FullName</div>
@@ -36,11 +37,11 @@
             </div>
         </div>
     </div>
-    <div class="row mt-5">
+    <div class="row mt-5 justify-content-center">
         <div class="col-12 col-lg-6">
             <div class="row">
                 <div class="col-6">
-                    <a asp-action="Index" class="btn btn-default">Back</a>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Back To List</a>
                 </div>
                 <div class="col-6 text-right">
                     <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" class="">

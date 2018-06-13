@@ -8,6 +8,8 @@ namespace HannahsHunt.Models.UsersViewModels
 {
     public class EditUserViewModel
     {
+        public string Id { get; set; }
+
         [Required]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
