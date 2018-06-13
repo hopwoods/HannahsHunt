@@ -24,7 +24,7 @@ namespace HannahsHunt.Controllers
     [Authorize(Roles="Administrator")]
     public class UsersController : Controller
     {
-
+        #region Initilisation and Context
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -46,15 +46,17 @@ namespace HannahsHunt.Controllers
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
-        }
+        }      
 
         //Clean Up Context
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
         }
+        #endregion
 
-        // GET: Administration
+        #region Index
+        // GET: Users/
         public async Task<IActionResult> Index(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -78,15 +80,19 @@ namespace HannahsHunt.Controllers
             _logger.LogInformation("Users list presented.");
             return View(usersWithRoles);
         }
-            
-        // GET: Administration/Details/5
+        #endregion
+
+        #region User Details
+        // GET: Users/Details/5
         public ActionResult Details(int id, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+        #endregion
 
-        // GET: Administration/Create
+        #region Create Users
+        // GET: Users/Create
         [HttpGet]
         public IActionResult Create(string returnUrl = null)
         {
@@ -94,7 +100,7 @@ namespace HannahsHunt.Controllers
             return View();
         }
 
-        // POST: Administration/Create
+        // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateUserViewModel model, string returnUrl = null)
@@ -136,35 +142,155 @@ namespace HannahsHunt.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+#endregion
 
-        // GET: Administration2/Edit/5
-        public ActionResult Edit(int id)
+        #region Edit Users
+        // GET: Users/Edit/5
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            IList<string> role = await _userManager.GetRolesAsync(user);
+            bool isAdmin = false;
+            foreach(string item in role)
+            {
+                if (item == "Administrator")
+                {
+                    isAdmin = true;
+                }
+            }
+
+            var model = new EditUserViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                IsAdmin = isAdmin,
+                Id = user.Id,
+                StatusMessage = null                
+            };
+            return View(model);
         }
 
-        // POST: Administration2/Edit/5
+        // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> EditConfirmed(EditUserViewModel model)
         {
+            if (model.Id == null)
+            {
+                return NotFound();
+            }
+            ApplicationUser userToUpdate = await _userManager.FindByIdAsync(model.Id);            
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    userToUpdate.FirstName = model.FirstName;
+                    userToUpdate.LastName = model.LastName;
+                    userToUpdate.Email = model.Email;
+                    userToUpdate.PhoneNumber = model.PhoneNumber;                   
 
-                return RedirectToAction(nameof(Index));
+                    var result = await _userManager.UpdateAsync(userToUpdate);
+                    if(result.Succeeded)
+                    {
+                        if(model.IsAdmin == true)
+                        {
+                            await _userManager.RemoveFromRoleAsync(userToUpdate,"Basic");
+                            await _userManager.AddToRoleAsync(userToUpdate,"Administrator");
+                        } else
+                        {
+                            await _userManager.RemoveFromRoleAsync(userToUpdate, "Administrator");
+                            await _userManager.AddToRoleAsync(userToUpdate, "Basic");
+                        }
+
+                        //Update Claims
+                        //Get the Users current claims
+                        var claims = await _userManager.GetClaimsAsync(userToUpdate);
+
+                        // Remove existing claim and replace with a new value
+
+                        //First Name
+                        if (claims.FirstOrDefault(c => c.Type == "FirstName") != null)
+                        {
+                            await _userManager.RemoveClaimAsync(userToUpdate, claims.FirstOrDefault(c => c.Type == "FirstName"));
+                            var setFirstNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("FirstName", userToUpdate.FirstName));
+                            if (!setFirstNameResult.Succeeded)
+                            {
+                                throw new ApplicationException($"Unexpected error occurred setting First Name for user with ID '{userToUpdate.Id}'.");
+                            }
+                        }
+                        else
+                        {
+                            var setFirstNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("FirstName", userToUpdate.FirstName));
+                            if (!setFirstNameResult.Succeeded)
+                            {
+                                throw new ApplicationException($"Unexpected error occurred setting First Name for user with ID '{userToUpdate.Id}'.");
+                            }
+                        }
+
+                        //Last Name
+                        if (claims.FirstOrDefault(c => c.Type == "LastName") != null)
+                        {
+                            await _userManager.RemoveClaimAsync(userToUpdate, claims.FirstOrDefault(c => c.Type == "LastName"));
+                            var setLastNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("LastName", userToUpdate.LastName));
+                            if (!setLastNameResult.Succeeded)
+                            {
+                                throw new ApplicationException($"Unexpected error occurred setting Last Name for user with ID '{userToUpdate.Id}'.");
+                            }
+                        }
+                        else
+                        {
+                            var setLastNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("LastName", userToUpdate.LastName));
+                            if (!setLastNameResult.Succeeded)
+                            {
+                                throw new ApplicationException($"Unexpected error occurred setting Last Name for user with ID '{userToUpdate.Id}'.");
+                            }
+                        }
+
+                        //Full Name
+                        if (claims.FirstOrDefault(c => c.Type == "FullName") != null)
+                        {
+                            await _userManager.RemoveClaimAsync(userToUpdate, claims.FirstOrDefault(c => c.Type == "FullName"));
+                            var setFullNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("FullName", userToUpdate.FullName));
+                            if (!setFullNameResult.Succeeded)
+                            {
+                                throw new ApplicationException($"Unexpected error occurred setting Full Name for user with ID '{userToUpdate.Id}'.");
+                            }
+                        }
+                        else
+                        {
+                            var setFullNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("FullName", userToUpdate.FullName));
+                            if (!setFullNameResult.Succeeded)
+                            {
+                                throw new ApplicationException($"Unexpected error occurred setting Full Name for user with ID '{userToUpdate.Id}'.");
+                            }
+                        }
+                        model.StatusMessage = "Success! User: " + model.FirstName + "...Details Saved";
+                    }
+                }
+                return View("Edit",model);
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                _logger.LogError(ex, "Error updating user {id}", model.Id);
+                model.StatusMessage = "Error! Something went wrong please try again later";
+                return View(model);
             }
         }
+        #endregion
 
+        #region Delete Users
         // GET: Users/Delete/5
         [HttpGet]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id, UsersWithRolesViewModel userWithRoles)
         {
-            UsersWithRolesViewModel userWithRoles = new UsersWithRolesViewModel();
             ApplicationUser user = await _userManager.FindByIdAsync(id);
             var roles = await _userManager.GetRolesAsync(user);
 
@@ -178,7 +304,7 @@ namespace HannahsHunt.Controllers
             userWithRoles.Roles = roles.ToList();            
             return View(userWithRoles);
         }
-
+        
         // POST: Users/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -236,6 +362,7 @@ namespace HannahsHunt.Controllers
                 return View();
             }
         }
+        #endregion
 
         #region Helpers
 

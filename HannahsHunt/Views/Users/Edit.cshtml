@@ -1,0 +1,70 @@
+﻿@model HannahsHunt.Models.UsersViewModels.EditUserViewModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+<h2>@ViewData["Title"]</h2>
+<h5 class="mb-4">Modify the below users details and click <strong>Save</strong></h5>
+@Html.Partial("_StatusMessage", Model.StatusMessage)
+<form asp-action="EditConfirmed" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            @{
+                var checkAdmin = "";
+                if (Model.IsAdmin)
+                {
+                    checkAdmin = "checked='checked'";
+                }
+                else
+                {
+                    checkAdmin = "";
+                }
+            }
+            <div class="form-group">
+                <div class="checkbox">
+                    <label asp-for="IsAdmin">
+                        @Html.CheckBoxFor(model => model.IsAdmin)
+                        <span class="cr"><i class="cr-icon fas fa-check"></i></span>
+                        @Html.DisplayNameFor(m => m.IsAdmin)
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div class="row">
+                <div class="col-6">
+                    <a asp-action="Index" class="btn btn-outline-secondary">Back To List</a>
+                </div>
+                <div class="col-6 text-right">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
