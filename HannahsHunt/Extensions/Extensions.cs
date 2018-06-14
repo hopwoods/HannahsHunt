@@ -31,6 +31,41 @@ namespace HannahsHunt.Extensions
             var fullName = principal.Claims.FirstOrDefault(c => c.Type == "FullName");
             return fullName?.Value;
         }
+        public static string GetUserClaim(this ClaimsPrincipal principal, string claimType)
+        {
+            var claim = principal.Claims.FirstOrDefault(c => c.Type == claimType);
+            return claim?.Value;
+        }
+
+        //Method for updating User Claims in the Database
+        public static async Task AddUpdateClaimAsync(this ClaimsPrincipal principal, UserManager<ApplicationUser> userManager, ApplicationUser user, string claimType, string value)
+        {
+            UserManager<ApplicationUser> _userManager = userManager;
+
+            //Get the Users current claims
+            var claims = await userManager.GetClaimsAsync(user);
+
+            // Check if claim exists, then...            
+            if (claims.FirstOrDefault(c => c.Type == claimType) != null)
+            {
+                // Remove existing claim and replace with a new value
+                await _userManager.RemoveClaimAsync(user, claims.FirstOrDefault(c => c.Type == claimType));
+                var result = await _userManager.AddClaimAsync(user, new Claim(claimType, value));
+                if (!result.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting Claim '{claimType}' for user with ID '{user.Id}'.");
+                }
+            }
+            else
+            {
+                // Add Claim with value
+                var result = await _userManager.AddClaimAsync(user, new Claim(claimType, value));
+                if (!result.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting Claim '{claimType}' for user with ID '{user.Id}'.");
+                }
+            }
+        }
     }
 }
 

@@ -49,7 +49,7 @@
 <h2>
     @if (SignInManager.IsSignedIn(User))
     {
-        <span>Hi @User.GetFirstName()! Welcome to</span>
+        <span>Hi @User.GetUserClaim("FirstName")! Welcome to</span>
     }
     Hannah's Hunt
 </h2>
