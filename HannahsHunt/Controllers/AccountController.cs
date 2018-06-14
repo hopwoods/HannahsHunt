@@ -16,7 +16,9 @@ using HannahsHunt.Services;
 
 namespace HannahsHunt.Controllers
 {
-
+    /// <summary>
+    /// Controller for Account Actions
+    /// </summary>
     [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller

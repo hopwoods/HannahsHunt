@@ -57,6 +57,12 @@ namespace HannahsHunt.Controllers
         #endregion
 
         #region Index
+
+        /// <summary>
+        /// Fetch and display a lis of Users and their associated role(s)
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         // GET: Users/
         public async Task<IActionResult> Index(string returnUrl = null)
         {
@@ -84,15 +90,38 @@ namespace HannahsHunt.Controllers
         #endregion
 
         #region User Details
+
+        /// <summary>
+        /// Fetch detailsof a specific User and pass to the Details view
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         // GET: Users/Details/5
-        public ActionResult Details(int id, string returnUrl = null)
+        public async Task<ActionResult> Details(string id, UsersDetailsViewModel userDetails, string returnUrl = null)
         {
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+            var roles = await _userManager.GetRolesAsync(user);
+
+            userDetails.Id = user.Id;
+            userDetails.FirstName = user.FirstName;
+            userDetails.LastName = user.LastName;
+            userDetails.FullName = user.FullName;
+            userDetails.UserName = user.UserName;
+            userDetails.Email = user.Email;
+            userDetails.PhoneNumber = user.PhoneNumber;
+            userDetails.Roles = roles.ToList();
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return View(userDetails);
         }
         #endregion
 
         #region Create Users
+        /// <summary>
+        /// Display the Create User View
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         // GET: Users/Create
         [HttpGet]
         public IActionResult Create(string returnUrl = null)
@@ -101,6 +130,12 @@ namespace HannahsHunt.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Create a new Identity User based on the provided values. Create role, and claims for the new user.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -120,7 +155,7 @@ namespace HannahsHunt.Controllers
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
 
-                    //Add Claims HERE!
+                    //Add Claims!
                     await _userManager.AddClaimAsync(user, new Claim("FirstName", user.FirstName));
                     await _userManager.AddClaimAsync(user, new Claim("LastName", user.LastName));
                     await _userManager.AddClaimAsync(user, new Claim("FullName", user.FullName));
@@ -146,6 +181,12 @@ namespace HannahsHunt.Controllers
 #endregion
 
         #region Edit Users
+
+        /// <summary>
+        /// Fetch Details of a specific Identity User and return to Edit View
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Users/Edit/5
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
@@ -179,6 +220,11 @@ namespace HannahsHunt.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Save the edited details of a User Identity
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -295,7 +341,7 @@ namespace HannahsHunt.Controllers
         #region Delete Users
         // GET: Users/Delete/5
         [HttpGet]
-        public async Task<IActionResult> Delete(string id, UsersWithRolesViewModel userWithRoles)
+        public async Task<IActionResult> Delete(string id, UsersWithRolesViewModel userWithRoles, string returnUrl = null)
         {
             ApplicationUser user = await _userManager.FindByIdAsync(id);
             var roles = await _userManager.GetRolesAsync(user);
@@ -307,7 +353,8 @@ namespace HannahsHunt.Controllers
             userWithRoles.UserName = user.UserName;
             userWithRoles.Email = user.Email;
             userWithRoles.PhoneNumber = user.PhoneNumber;
-            userWithRoles.Roles = roles.ToList();            
+            userWithRoles.Roles = roles.ToList();
+            ViewData["ReturnUrl"] = returnUrl;
             return View(userWithRoles);
         }
         

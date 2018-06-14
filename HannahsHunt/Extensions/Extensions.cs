@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace HannahsHunt.Extensions
 {
+    /// <summary>
+    /// Extenstion to the ClaimsPrinciple of Identity
+    /// </summary>
     public static class ClaimsPrincipalExtension
     {
         /// <summary>
@@ -63,6 +66,7 @@ namespace HannahsHunt.Extensions
         }
 
         /// <summary>Adds or Updates a User Claim to DB</summary>
+        /// <param name="principal"> Claims Principle instance</param>
         /// <param name="userManager"> UserManager instance</param>
         /// <param name="user"> ApplicationUser object </param>
         /// <param name="claimType"> Claims Principle Claim Type</param>

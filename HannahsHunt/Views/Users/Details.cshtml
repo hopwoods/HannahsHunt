@@ -1,0 +1,52 @@
+﻿@model HannahsHunt.Models.UsersViewModels.UsersDetailsViewModel
+@{
+    ViewBag.Title = "User Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h5 class="mb-4">See the details the following user below:</h5>
+<div class="row justify-content-center">
+    <div class="col-lg-6 ">
+        <h6>User Details</h6>
+        <div class="row">
+            <div class="col-md-4 text-primary"><strong>@Html.DisplayNameFor(model => model.FirstName)</strong></div>
+            <div class="col-md-8">@Model.FirstName</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-primary"><strong>@Html.DisplayNameFor(model => model.LastName)</strong></div>
+            <div class="col-md-8">@Model.LastName</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-primary"><strong>@Html.DisplayNameFor(model => model.FullName)</strong></div>
+            <div class="col-md-8">@Model.FullName</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-primary"><strong>@Html.DisplayNameFor(model => model.UserName)</strong></div>
+            <div class="col-md-8">@Model.UserName</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-primary"><strong>@Html.DisplayNameFor(model => model.Email)</strong></div>
+            <div class="col-md-8">@Model.Email</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-primary"><strong>@Html.DisplayNameFor(model => model.PhoneNumber)</strong></div>
+            <div class="col-md-8">@Model.PhoneNumber</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-primary"><strong>@Html.DisplayNameFor(model => model.Roles)</strong></div>
+            <div class="col-md-8">
+                @foreach (var role in Model.Roles)
+                {
+                    <span>@role</span>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-5 justify-content-center">
+    <div class="col-12 col-lg-6">
+        <a asp-action="Index" class="btn btn-outline-secondary">Back To List</a>
+    </div>
+</div>
+
