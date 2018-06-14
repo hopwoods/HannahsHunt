@@ -14,9 +14,9 @@
   ],
   "install": {
     "path": {
-      "css": "wwwroot/css",
-      "js": "wwwroot/js",
-      "/[sc|le]ss$/": "wwwroot/css"
+        "css": "wwwroot/css",
+        "js": "wwwroot/js",
+        "/[sc|le]ss$/": "wwwroot/css"
     },
     "sources": {
       "jQuery": [
@@ -30,9 +30,9 @@
       "font-awesome": [
         "bower_components/font-awesome/svg-with-js/js/fontawesome-all.js"
       ],
-      "moment": [
-        "bower_components/moment/src/moment.js"
-      ],
+        "moment": [
+            "bower_components/moment/min/moment.min.js"
+        ],
       "pineapple-sass": [
         "bower_components/pineapple-sass/build/_pineapple-sass.scss"
       ],
