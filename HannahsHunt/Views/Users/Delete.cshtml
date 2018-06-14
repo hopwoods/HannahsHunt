@@ -11,6 +11,14 @@
         <div class="col-lg-6 ">
             <h6>User Details</h6>
             <div class="row">
+                <div class="col-md-4 text-primary"><strong>@Html.DisplayNameFor(model => model.FirstName)</strong></div>
+                <div class="col-md-8">@Model.FirstName</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-primary"><strong>@Html.DisplayNameFor(model => model.LastName)</strong></div>
+                <div class="col-md-8">@Model.LastName</div>
+            </div>
+            <div class="row">
                 <div class="col-md-4 text-primary"><strong>@Html.DisplayNameFor(model => model.FullName)</strong></div>
                 <div class="col-md-8">@Model.FullName</div>
             </div>

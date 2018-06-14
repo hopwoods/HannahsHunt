@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HannahsHunt.Models.UsersViewModels
 {
-    public class UsersWithRolesViewModel
+    public class UsersDetailsViewModel
     {
 
         public string Id { get; set; }
@@ -25,8 +25,8 @@ namespace HannahsHunt.Models.UsersViewModels
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
-        [DataType(DataType.PhoneNumber)]
         [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
         [EmailAddress]
