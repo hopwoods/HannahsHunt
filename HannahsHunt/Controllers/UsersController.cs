@@ -83,6 +83,7 @@ namespace HannahsHunt.Controllers
                     PhoneNumber = user.PhoneNumber,
                     Roles = roles
                 });
+                usersWithRoles.OrderBy(u => u.FirstName);
             }
             _logger.LogInformation("Users list presented.");
             return View(usersWithRoles);
