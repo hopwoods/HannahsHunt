@@ -259,13 +259,81 @@ footer a.btn:hover {
 
 //Responsive Tables
 
-.responsive-table td {
+/*.responsive-table td {
     border: none;
     border-bottom: 1px solid $gray-200;
     white-space: normal;
     text-align: left;
     min-height: 2.4rem;
     line-height: $line-height-base;
+}*/
+
+/* Responsive Tables */
+@media only screen and (max-width: 800px) {
+    /*
+    //Force table to not be like tables anymore
+    .responsive-table table,
+    .responsive-table thead,
+    .responsive-table tbody,
+    .responsive-table th,
+    .responsive-table td,
+    .responsive-table tr {
+        display: block;
+        border-collapse: collapse;
+    }
+    // Hide table headers (but not display: none;, for accessibility)
+    .responsive-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .responsive-table tr {
+        border: 0;
+        border-left: 1px solid $gray-400;
+        border-right: 1px solid $gray-400;
+    }
+
+    .responsive-table tr:hover {
+        background-color: $gray-100;
+    }
+
+    .responsive-table tr:first-child {
+        border-top: 1px solid $gray-400;
+    }
+
+    .responsive-table tr:last-of-type {
+        border-bottom: 1px solid $gray-400;
+    }
+
+    .responsive-table td {
+        // Behave  like a "row"
+        border: none;
+        border-bottom: 1px solid $gray-200;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align: left;
+        min-height: 2.4rem;
+        line-height: $line-height-base
+    }
+
+    .responsive-table td:before {
+        // Now like a table header
+        position: absolute;
+        // Top/left values mimic padding
+        top: 0.6rem;
+        left: 0.6rem;
+        width: 45%;
+        padding-right: 0.1rem;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        content: attr(data-title);
+    }
+    //Label the data
+    .responsive-table td:before {
+    }*/
 }
 
 // Forms
@@ -393,71 +461,4 @@ div.validation-summary-errors ul {
     display: inline-block;
 }
 
-/* Responsive Tables */
-@media only screen and (max-width: 800px) {
-    /* Force table to not be like tables anymore */
-    .responsive-table table,
-    .responsive-table thead,
-    .responsive-table tbody,
-    .responsive-table th,
-    .responsive-table td,
-    .responsive-table tr {
-        display: block;
-        border-collapse: collapse;
-    }
-    /* Hide table headers (but not display: none;, for accessibility) */
-    .responsive-table thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
 
-    .responsive-table tr {
-        border: 0;
-        border-left: 1px solid $gray-400;
-        border-right: 1px solid $gray-400;
-    }
-
-    .responsive-table tr:hover {
-        background-color: $gray-100;
-    }
-
-    .responsive-table tr:first-child {
-        border-top: 1px solid $gray-400;
-    }
-
-    .responsive-table tr:last-of-type {
-        border-bottom: 1px solid $gray-400;
-    }
-
-    .responsive-table td {
-        /* Behave  like a "row" */
-        border: none;
-        border-bottom: 1px solid $gray-200;
-        position: relative;
-        padding-left: 50%;
-        white-space: normal;
-        text-align: left;
-        min-height: 2.4rem;
-        line-height: $line-height-base
-    }
-
-    .responsive-table td:before {
-        /* Now like a table header */
-        position: absolute;
-        /* Top/left values mimic padding */
-        top: 0.6rem;
-        left: 0.6rem;
-        width: 45%;
-        padding-right: 0.1rem;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: bold;
-        content: attr(data-title);
-    }
-    /*
-	Label the data
-	*/
-    .responsive-table td:before {
-    }
-}
