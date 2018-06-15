@@ -66,12 +66,11 @@ namespace HannahsHunt.Extensions
         }
 
         /// <summary>Adds or Updates a User Claim to DB</summary>
-        /// <param name="principal"> Claims Principle instance</param>
         /// <param name="userManager"> UserManager instance</param>
         /// <param name="user"> ApplicationUser object </param>
         /// <param name="claimType"> Claims Principle Claim Type</param>
         /// <param name="value"> Claim Value</param>
-        public static async Task AddUpdateClaimAsync(this ClaimsPrincipal principal, UserManager<ApplicationUser> userManager, ApplicationUser user, string claimType, string value)
+        public static async Task AddUpdateClaimAsync(this UserManager<ApplicationUser> userManager, ApplicationUser user, string claimType, string value)
         {
             UserManager<ApplicationUser> _userManager = userManager;
 

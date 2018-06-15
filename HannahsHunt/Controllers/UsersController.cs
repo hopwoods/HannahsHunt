@@ -259,72 +259,11 @@ namespace HannahsHunt.Controllers
                         }
 
                         //Update Claims
-                        // Located in Extentions.cs
-                        await User.AddUpdateClaimAsync(_userManager, userToUpdate, "FirstName", userToUpdate.FirstName);
-                        await User.AddUpdateClaimAsync(_userManager, userToUpdate, "LastName", userToUpdate.LastName);
-                        await User.AddUpdateClaimAsync(_userManager, userToUpdate, "FullName", userToUpdate.FullName);
+                        //Located in Extentions.cs
+                        await _userManager.AddUpdateClaimAsync(userToUpdate, "FirstName", userToUpdate.FirstName);
+                        await _userManager.AddUpdateClaimAsync(userToUpdate, "LastName", userToUpdate.LastName);
+                        await _userManager.AddUpdateClaimAsync(userToUpdate, "FullName", userToUpdate.FullName);
 
-                        ////Get the Users current claims
-                        //var claims = await _userManager.GetClaimsAsync(userToUpdate);
-
-                        //// Remove existing claim and replace with a new value
-
-                        ////First Name
-                        //if (claims.FirstOrDefault(c => c.Type == "FirstName") != null)
-                        //{
-                        //    await _userManager.RemoveClaimAsync(userToUpdate, claims.FirstOrDefault(c => c.Type == "FirstName"));
-                        //    var setFirstNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("FirstName", userToUpdate.FirstName));
-                        //    if (!setFirstNameResult.Succeeded)
-                        //    {
-                        //        throw new ApplicationException($"Unexpected error occurred setting First Name for user with ID '{userToUpdate.Id}'.");
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    var setFirstNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("FirstName", userToUpdate.FirstName));
-                        //    if (!setFirstNameResult.Succeeded)
-                        //    {
-                        //        throw new ApplicationException($"Unexpected error occurred setting First Name for user with ID '{userToUpdate.Id}'.");
-                        //    }
-                        //}
-
-                        ////Last Name
-                        //if (claims.FirstOrDefault(c => c.Type == "LastName") != null)
-                        //{
-                        //    await _userManager.RemoveClaimAsync(userToUpdate, claims.FirstOrDefault(c => c.Type == "LastName"));
-                        //    var setLastNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("LastName", userToUpdate.LastName));
-                        //    if (!setLastNameResult.Succeeded)
-                        //    {
-                        //        throw new ApplicationException($"Unexpected error occurred setting Last Name for user with ID '{userToUpdate.Id}'.");
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    var setLastNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("LastName", userToUpdate.LastName));
-                        //    if (!setLastNameResult.Succeeded)
-                        //    {
-                        //        throw new ApplicationException($"Unexpected error occurred setting Last Name for user with ID '{userToUpdate.Id}'.");
-                        //    }
-                        //}
-
-                        ////Full Name
-                        //if (claims.FirstOrDefault(c => c.Type == "FullName") != null)
-                        //{
-                        //    await _userManager.RemoveClaimAsync(userToUpdate, claims.FirstOrDefault(c => c.Type == "FullName"));
-                        //    var setFullNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("FullName", userToUpdate.FullName));
-                        //    if (!setFullNameResult.Succeeded)
-                        //    {
-                        //        throw new ApplicationException($"Unexpected error occurred setting Full Name for user with ID '{userToUpdate.Id}'.");
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    var setFullNameResult = await _userManager.AddClaimAsync(userToUpdate, new Claim("FullName", userToUpdate.FullName));
-                        //    if (!setFullNameResult.Succeeded)
-                        //    {
-                        //        throw new ApplicationException($"Unexpected error occurred setting Full Name for user with ID '{userToUpdate.Id}'.");
-                        //    }
-                        //}
                         model.StatusMessage = "Success! User: " + model.FirstName + "...Details Saved";
                     }
                 }
