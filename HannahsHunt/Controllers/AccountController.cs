@@ -23,6 +23,7 @@ namespace HannahsHunt.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
+        #region initilisation and contexts
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -42,6 +43,10 @@ namespace HannahsHunt.Controllers
 
         [TempData]
         public string ErrorMessage { get; set; }
+
+        #endregion
+
+        #region Login
 
         [HttpGet]
         [AllowAnonymous]
@@ -199,13 +204,18 @@ namespace HannahsHunt.Controllers
             }
         }
 
+        #endregion
+
+        #region Lockout
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Lockout()
         {
             return View();
         }
+        #endregion
 
+        #region Register
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
@@ -251,6 +261,10 @@ namespace HannahsHunt.Controllers
             return View(model);
         }
 
+        #endregion
+
+        #region Logout
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -259,6 +273,9 @@ namespace HannahsHunt.Controllers
             _logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+        #endregion
+
+        #region External Login
 
         [HttpPost]
         [AllowAnonymous]
@@ -347,6 +364,10 @@ namespace HannahsHunt.Controllers
             return View(nameof(ExternalLogin), model);
         }
 
+        #endregion
+
+        #region Confirm Email Address
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
@@ -363,6 +384,10 @@ namespace HannahsHunt.Controllers
             var result = await _userManager.ConfirmEmailAsync(user, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
+
+        #endregion
+
+        #region Forgot Password
 
         [HttpGet]
         [AllowAnonymous]
@@ -404,6 +429,10 @@ namespace HannahsHunt.Controllers
         {
             return View();
         }
+
+        #endregion
+
+        #region Reset Password
 
         [HttpGet]
         [AllowAnonymous]
@@ -448,12 +477,17 @@ namespace HannahsHunt.Controllers
             return View();
         }
 
+        #endregion
+
+        #region Access Denied
 
         [HttpGet]
         public IActionResult AccessDenied()
         {
             return View();
         }
+
+        #endregion
 
         #region Helpers
 

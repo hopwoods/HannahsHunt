@@ -21,6 +21,7 @@ namespace HannahsHunt.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
+        #region Initialisation & Contexts
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -46,6 +47,10 @@ namespace HannahsHunt.Controllers
 
         [TempData]
         public string StatusMessage { get; set; }
+
+        #endregion
+
+        #region Manage Home Page
 
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -188,7 +193,9 @@ namespace HannahsHunt.Controllers
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }
+        #endregion
 
+        #region Verification Email
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)
@@ -231,6 +238,9 @@ namespace HannahsHunt.Controllers
             var model = new ChangePasswordViewModel { StatusMessage = StatusMessage };
             return View(model);
         }
+        #endregion
+
+        #region Set & Change Password
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -308,6 +318,9 @@ namespace HannahsHunt.Controllers
 
             return RedirectToAction(nameof(SetPassword));
         }
+        #endregion
+
+        #region External Logins
 
         [HttpGet]
         public async Task<IActionResult> ExternalLogins()
@@ -389,6 +402,10 @@ namespace HannahsHunt.Controllers
             StatusMessage = "The external login was removed.";
             return RedirectToAction(nameof(ExternalLogins));
         }
+
+        #endregion
+
+        #region Two factor Authentication
 
         [HttpGet]
         public async Task<IActionResult> TwoFactorAuthentication()
@@ -573,6 +590,8 @@ namespace HannahsHunt.Controllers
 
             return View(nameof(ShowRecoveryCodes), model);
         }
+
+        #endregion
 
         #region Helpers
 
