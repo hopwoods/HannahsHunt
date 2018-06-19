@@ -11,11 +11,11 @@ namespace HannahsHunt.Views.Manage
     {
         public static string ActivePageKey => "ActivePage";
 
-        public static string Index => "Index";
+        public static string Index => "Index nav-item";
 
-        public static string ChangePassword => "ChangePassword";
+        public static string ChangePassword => "ChangePassword nav-item";
 
-        public static string ExternalLogins => "ExternalLogins";
+        public static string ExternalLogins => "ExternalLogins nav-item";
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
